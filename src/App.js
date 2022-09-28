@@ -4,9 +4,9 @@ import React from "react";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Shop from "./components//shop";
-import Home from "./components/home";
-import Error from "./components/error";
+import Shop from "./components/shop";
+import Home from "./components/Home";
+import Error from "./components/Error";
 import Cart from "./components/shoppingCart";
 import Purchase from "./components/paymentEntry";
 import Shipping from "./components/shippingEntry";

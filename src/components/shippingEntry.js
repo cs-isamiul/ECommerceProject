@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Shipping(payState, paySetState) {
   const [shipState, shipSetState] = useState({
@@ -14,6 +14,7 @@ export default function Shipping(payState, paySetState) {
     shippingZip:"",
   });
 
+  const location = useLocation();
 
   const onChange = (e) => {
     /*
@@ -36,7 +37,7 @@ export default function Shipping(payState, paySetState) {
   // const handleSubmit = (e) =>{
   //   navigate('/cart/shipping', {state: state, setState: setState});
   // }
-
+  console.log(location);
   return (
   <div>
     <form >

@@ -1,22 +1,23 @@
 import React from "react";
+import orderInformation from "../data/orderConfirmation.json"
 
-const orderInformation = {
-  id: 43798,
-  currency: "$",
-  total: "$378.45",
-  estimatedDeliveryDateMin: "October 2, 2022",
-  estimatedDeliveryDateMax: "December 9, 2022",
-}
 
 function OrderConfirm() {
+  const order = getOrderDetails(1);
+
   return (
     <>
       <h1>Your Order Has Been Confirmed! Thank you for shopping at "Get Connected!"</h1>
-      <h2>Your order id is: {orderInformation.id}</h2>
-      <h2>Your order total is: {orderInformation.total}</h2>
-      <h2>Your estimated deliver date as of now is: {orderInformation.estimatedDeliveryDateMin}-{orderInformation.estimatedDeliveryDateMax}</h2>
+      <h2>Your order id is: {order.id}</h2>
+      <h2>Your order total is: {order.currency}{order.total}</h2>
+      <h2>Your estimated deliver date as of now is: {order.estimatedDeliveryDateMin}-{order.estimatedDeliveryDateMax}</h2>
     </>
   );
+}
+
+//Change this method once database is hooked in, or once we pass data from different components
+function getOrderDetails(confirmationNumber) {
+  return orderInformation[confirmationNumber];
 }
 
 export default OrderConfirm;

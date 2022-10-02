@@ -1,6 +1,8 @@
 import React from "react";
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import "bootstrap/dist/css/bootstrap.min.css"
 
 export default function Payment() {
   const [payState, setPayState] = useState({
@@ -92,7 +94,7 @@ export default function Payment() {
         autoComplete ={false}
         onChange={onChange}
       />
-      {/* <input type = "button" className = 'bth' value='Pay'/> */}
+      
       <button>Pay</button>
     </form>
   </div>);

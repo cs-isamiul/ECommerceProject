@@ -50,9 +50,9 @@ export default function Shop() {
   //navigate to 'cart' and pass cart content.
   const navigate = useNavigate();
   const handleCart = () => {
-    navigate("/cart", { cart, setCart });
-    console.log(cart);
+    navigate("/cart", { state: { cart: cart } });
   };
+  //console.log("cart:", cart);
   return (
     <div className="shop">
       <Navbar bg="light" expand="lg" sticky="top">

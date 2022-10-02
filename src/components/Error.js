@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
 export default function Error() {
-  return (<h2>Invalid Route!</h2>);
-  //TODO: improve error handling for invalid routes.
+  return (
+    <div>
+      <h2>Invalid Route!</h2>
+      <p>Please navigate to a valid route.</p>
+    </div>
+  );
 }

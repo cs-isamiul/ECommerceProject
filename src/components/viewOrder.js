@@ -1,6 +1,19 @@
 import React from "react";
+import orderInformation from "../data/orderConfirmation.json"
+import {GenerateInfoHeader, GenereateItemInfo} from "./orderSummaryGenerator"
 
-export default function OrderSummary() {
-  return <h2>Order Summary</h2>;
-  //TODO: develop order summary to display purchased items and billing + shipping info.
+function OrderSummary() {
+  const orderNumber = 1;
+
+  return (
+    <>
+      <GenerateInfoHeader order={orderInformation[orderNumber]} />
+      {orderInformation[orderNumber].items.map((phone, index)=>{
+        return <GenereateItemInfo key={index} item={phone} currency={orderInformation[orderNumber].currency}/>;
+      })}
+    </>
+  );
+
 }
+
+export default OrderSummary;

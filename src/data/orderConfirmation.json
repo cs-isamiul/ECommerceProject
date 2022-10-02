@@ -30,9 +30,9 @@
         "id": 43798,
         "currency": "$",
         "total": "1124.36",
-        "estimatedDeliveryDateMin": "November 2, 2022",
-        "estimatedDeliveryDateMax": "November 9, 2022",
-        "orderDate": "October 22, 2022",
+        "estimatedDeliveryDateMin": "October 2, 2022",
+        "estimatedDeliveryDateMax": "October 2, 2022",
+        "orderDate": "October 1, 2022",
         "shipTo": "Bill Jobs",
         "items":[
             {

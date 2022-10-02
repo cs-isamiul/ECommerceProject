@@ -1,23 +1,29 @@
 import React from "react";
 import orderInformation from "../data/orderConfirmation.json"
-
+import {useLocation} from "react-router-dom";
+import {GenerateInfoHeader, GenereateItemInfo} from "./orderSummaryGenerator"
 
 function OrderConfirm() {
-  const order = getOrderDetails(1);
+  const order = getOrderDetails();
+  //<h1>Name Recieved Was: {location.state.name}</h1>
 
   return (
     <>
       <h1>Your Order Has Been Confirmed! Thank you for shopping at "Get Connected!"</h1>
-      <h2>Your order id is: {order.id}</h2>
-      <h2>Your order total is: {order.currency}{order.total}</h2>
-      <h2>Your estimated deliver date as of now is: {order.estimatedDeliveryDateMin}-{order.estimatedDeliveryDateMax}</h2>
+
+      <GenerateInfoHeader order={order} />
+      {order.items.map((phone, index)=>{
+        return <GenereateItemInfo key={index} item={phone} currency={order.currency}/>;
+      })}
+      
     </>
   );
 }
 
 //Change this method once database is hooked in, or once we pass data from different components
-function getOrderDetails(confirmationNumber) {
-  return orderInformation[confirmationNumber];
+function getOrderDetails() {
+  const location = useLocation();
+  return orderInformation[1];
 }
 
 export default OrderConfirm;

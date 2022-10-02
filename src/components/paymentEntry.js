@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function Payment() {
+  const location = useLocation();
+
   const [payState, setPayState] = useState({
     paymentFirstName: "",
     paymentLastName: "",
@@ -13,7 +15,8 @@ export default function Payment() {
     paymentCardYear: "",
     paymentCardMonth: "",
   });
-  const navigate = useNavigate();
+
+  const cart = useState(location.state.cart);
 
   const onChange = (e) => {
     /*
@@ -33,12 +36,13 @@ export default function Payment() {
     }));
   };
 
+
+
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
-    navigate("/cart/shipping", {
-      payState: payState,
-      setPayState: setPayState,
-    });
-    // history.push('/cart/shipping');
+    navigate("/cart/shipping", {state:{cart: cart}});
+    //     navigate("/cart/shipping", {state:{payState: payState, cart: cart}});
+
   };
 
   return (

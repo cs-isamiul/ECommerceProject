@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
-export default function Shipping(payState, paySetState) {
+export default function Shipping() {
   const [shipState, shipSetState] = useState({
     shippingFirstName: "",
     shippingLastName: "",
@@ -16,6 +16,8 @@ export default function Shipping(payState, paySetState) {
   });
 
   const location = useLocation();
+  // const getfromPayState = useState(location.state.payState);
+  // console.log(getfromPayState);
 
   const onChange = (e) => {
     /*
@@ -32,15 +34,15 @@ export default function Shipping(payState, paySetState) {
     }));
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const handleSubmit = (e) =>{
+    navigate('/cart/confirmation');
+  }
 
-  // const handleSubmit = (e) =>{
-  //   navigate('/cart/shipping', {state: state, setState: setState});
-  // }
   console.log(location);
   return (
     <div>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <h1>Shipping Information</h1>
 
         <Col xs={4}>

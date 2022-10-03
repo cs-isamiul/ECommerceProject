@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate, useLocation} from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import StandardNavbar from "./standardNavbar";
 
 export default function Payment() {
   const location = useLocation();
@@ -47,6 +48,8 @@ export default function Payment() {
   };
 
   return (
+    <>
+    <StandardNavbar />
     <div>
       <Form onSubmit={handleSubmit}>
         <h1>Payment Information</h1>
@@ -138,6 +141,7 @@ export default function Payment() {
         <button>Pay</button>
       </Form>
     </div>
+    </>
   );
 
   //TODO: develop entry for the collection of billing inFormation before placing an order.

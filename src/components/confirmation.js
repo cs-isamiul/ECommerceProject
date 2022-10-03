@@ -9,6 +9,26 @@ function OrderConfirm() {
 
   try {
     const order = location.state.cart;
+    let paymentInfo = {paymentFirstName:"Someone", paymentLastName:"Cool"};
+    let shipmentInfo = {shippingFirstName:"Someone", paymentLastName:"Cool"};
+
+    //temp solution
+    try {
+      paymentInfo = location.state.payState;
+      shipmentInfo = location.state.shipState;
+
+      if(paymentInfo.paymentFirstName.length == 0)
+      {
+        paymentInfo = {paymentFirstName:"Someone", paymentLastName:"Cool"};
+      }
+
+      if(shipmentInfo.shippingFirstName.length == 0)
+      {
+        shipmentInfo = {shippingFirstName:"Someone", paymentLastName:"Cool"};
+      }
+    } catch (error) {
+      console.log("error");
+    }
 
     return (
       <>

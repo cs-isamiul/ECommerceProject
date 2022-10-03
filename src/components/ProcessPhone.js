@@ -41,7 +41,6 @@ const Phone = (props) => {
 
           <Card.Text>Memory size: {phoneItem.memorySize}</Card.Text>
           <Card.Text>Screen size: {phoneItem.screenSize}</Card.Text>
-          <Card.Text>Screen size: {phoneItem.screenSize}</Card.Text>
           <Card.Text>Color: {phoneItem.color}</Card.Text>
           <Card.Text>Condition: {phoneItem.condition}</Card.Text>
           <Card.Text>Price: {phoneItem.price}</Card.Text>

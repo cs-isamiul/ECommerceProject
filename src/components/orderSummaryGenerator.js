@@ -1,4 +1,8 @@
 import React from "react";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 /**
  * Pass in an entire order object. This will create an html header for this order.
@@ -8,6 +12,11 @@ import React from "react";
 function GenerateInfoHeader(props) {
     const { order } = props;
 
+    if ((order.estimatedDeliveryDateMax)) {
+        order.estimatedDeliveryDateMax = "N/A";
+        order.estimatedDeliveryDateMin = "N/A";
+    }
+
     let deliverDateMessage = `Delivery Estimate: ${order.estimatedDeliveryDateMin}-${order.estimatedDeliveryDateMax}`;
     if (order.estimatedDeliveryDateMax === order.estimatedDeliveryDateMin) {
         deliverDateMessage = "Delivered On: " + order.estimatedDeliveryDateMax;
@@ -16,9 +25,9 @@ function GenerateInfoHeader(props) {
 
     return <>
         <div className="Order Header">
-            <p>Order Placed on: {order.orderDate}</p>
-            <p>Order Total: {order.currency}{order.total}</p>
-            <p>Order Shipped to: {order.shipTo}</p>
+            <p>Order Placed on: Today (change later)</p>
+            <p>Order Total: Total to be calculated</p>
+            <p>Order Shipped to: Person information</p>
             <p>{deliverDateMessage}</p>
             <hr />
         </div>
@@ -35,12 +44,27 @@ function GenereateItemInfo(props) {
 
     return (
         <>
-            <div className="Item">
-                <img src={item.imageUrl} alt={item.model} height="auto" width="15%" />
-                <p>{item.brand} {item.model} @ {props.currency}{item.price}</p>
-            </div>
+            <Card className="phone">
+                <div className="card_img_container">
+                    <Card.Img
+                        variant="top"
+                        style={{
+                            height: "100%",
+                            width: "100%",
+                            objectFit: "contain",
+                            margin: "0.5rem",
+                        }} img src={item.img} alt={item.model} />
+                </div>
+                <Card.Body>
+                    <Card.Text>
+                        <p>{item.brand} {item.model} {item.qty} @ {item.price}</p>
+                    </Card.Text>
+
+                </Card.Body>
+
+            </Card>
         </>
     );
 }
 
-export {GenerateInfoHeader, GenereateItemInfo};
+export { GenerateInfoHeader, GenereateItemInfo };

@@ -2,6 +2,10 @@
 nodeJS <=v16.15.0
 
 npm <=v8.5.5
+
+# How to preview this project without installing
+https://ecommerceproject-2022.netlify.app/
+
 # How to run this project
 Clone this project using **git clone**
 

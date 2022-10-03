@@ -33,7 +33,7 @@ function StandardNavbar(){
     return <>
         <Navbar bg="light" expand="lg" sticky="top">
         <Container fluid>
-          <Navbar.Brand href="#">E-shop</Navbar.Brand>
+          <Navbar.Brand href="/">E-shop</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav

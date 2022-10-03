@@ -25,12 +25,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Shop />} /> {/* Was home */}
         <Route path="/catalog" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cart/purchase" element={<Purchase />} />
         <Route path="/cart/shipping" element={<Shipping />} />
-        <Route path="/cart/orderSummary" element={<OrderSummary />} />
+        <Route path="/cart/orderSummary" element={<OrderConfirm />} /> {/* Was orderSummary, but confirm does same thing right now*/}
         <Route path="/cart/confirmation" element={<OrderConfirm />} />
         <Route path="*" element={<Error />} />
       </Routes>

@@ -38,7 +38,7 @@ function OrderConfirm() {
 
         <div className="center">
           <h1>Your Order Has Been Confirmed!<br/>Thank you for shopping at "Get Connected!"</h1>
-          <GenerateInfoHeader order={order} />
+          <GenerateInfoHeader order={paymentInfo} />
         </div>
 
         <section className="shoplist">

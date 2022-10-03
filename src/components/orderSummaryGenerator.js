@@ -12,9 +12,9 @@ import Card from "react-bootstrap/Card";
 function GenerateInfoHeader(props) {
     const { order } = props;
 
-    if ((order.estimatedDeliveryDateMax)) {
-        order.estimatedDeliveryDateMax = "N/A";
-        order.estimatedDeliveryDateMin = "N/A";
+    if (!(order.estimatedDeliveryDateMax)) {
+        order.estimatedDeliveryDateMax = "10/02/2065";
+        order.estimatedDeliveryDateMin = "10/02/2025";
     }
 
     let deliverDateMessage = `Delivery Estimate: ${order.estimatedDeliveryDateMin}-${order.estimatedDeliveryDateMax}`;
@@ -27,7 +27,7 @@ function GenerateInfoHeader(props) {
         <div className="Order Header">
             <p>Order Placed on: Today (change later)</p>
             <p>Order Total: Total to be calculated</p>
-            <p>Order Shipped to: Person information</p>
+            <p>Order Shipped to: {order.paymentFirstName} {order.paymentLastName}</p>
             <p>{deliverDateMessage}</p>
             <hr />
         </div>

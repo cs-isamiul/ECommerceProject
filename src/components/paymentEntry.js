@@ -16,7 +16,7 @@ export default function Payment() {
     paymentCardMonth: "",
   });
 
-  const cart = useState(location.state.cart);
+  //const cart = location.state.cart;
 
   const onChange = (e) => {
     /*
@@ -40,7 +40,7 @@ export default function Payment() {
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
-    navigate("/cart/shipping", {state:{cart: cart}});
+    navigate("/cart/shipping", {state: {cart: location.state.cart}});
     //     navigate("/cart/shipping", {state:{payState: payState, cart: cart}});
 
   };

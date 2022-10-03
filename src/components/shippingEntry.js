@@ -36,7 +36,7 @@ export default function Shipping() {
 
   const navigate = useNavigate();
   const handleSubmit = (e) =>{
-    navigate('/cart/confirmation');
+    navigate('/cart/confirmation', {state: {cart: location.state.cart}});
   }
 
   console.log(location);

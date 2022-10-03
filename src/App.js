@@ -12,7 +12,7 @@ import Error from "./components/Error";
 import Cart from "./components/shoppingCart";
 import Purchase from "./components/paymentEntry";
 import Shipping from "./components/shippingEntry";
-import OrderSummary from "./components/viewOrder";
+import OrderSummary from "./components/viewOrders";
 import OrderConfirm from "./components/confirmation";
 
 // Bootstrap CSS

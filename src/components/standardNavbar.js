@@ -10,28 +10,28 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 
-function StandardNavbar(){
+function StandardNavbar() {
+  const location = useLocation();
 
-    const location = useLocation();
+  const [cart, setCart] = useState([]);
 
-    const [cart, setCart] = useState([]);
+  useEffect(() => {
+    try {
+      setCart(location.state.cart);
+    } catch (error) {
+      console.log("No Previous Cart");
+    }
+  }, []);
 
-    useEffect(()=>{
-        try {
-            setCart(location.state.cart);
-        } catch (error) {
-            console.log("No Previous Cart");
-        }
-    }, []);
-    
-    const navigate = useNavigate();
-    
-    const handleCart = () => {
-        navigate("/cart", { state: { cart: cart } });
-      };
+  const navigate = useNavigate();
 
-    return <>
-        <Navbar bg="light" expand="lg" sticky="top">
+  const handleCart = () => {
+    navigate("/cart", { state: { cart: cart } });
+  };
+
+  return (
+    <>
+      <Navbar bg="light" expand="lg" sticky="top">
         <Container fluid>
           <Navbar.Brand href="/">E-shop</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -63,6 +63,7 @@ function StandardNavbar(){
         </Container>
       </Navbar>
     </>
+  );
 }
 
 export default StandardNavbar;

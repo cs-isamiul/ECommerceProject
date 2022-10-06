@@ -12,38 +12,47 @@ import Badge from "react-bootstrap/Badge";
 
 export default function Shop() {
   const [cart, setCart] = useState([]);
+  const [cartSize, setCartSize] = useState();
 
   const addToCart = (phoneItem, qty) => {
     const cartItem = cart.find((x) => x.id === phoneItem.id);
     //if phoneItem is already in cart, simply increase its count.
-    qty = parseInt(qty || 1);
-    if (cartItem) {
-      console.log(qty + cartItem.count);
-      setCart(
-        //locate existing item and icrease count. Ensure users don't overflow cart.
-        cart.map((x) =>
-          x.id === phoneItem.id
-            ? {
-                ...cartItem,
-                count: Number.isSafeInteger(cartItem.count + qty)
-                  ? cartItem.count + qty
-                  : cartItem.count,
-              }
-            : x
-        )
-      );
-      console.log(
-        "Updated product count for: " + phoneItem.brand + " " + phoneItem.model
-      );
-    } else {
-      setCart([...cart, { ...phoneItem, count: qty }]);
-      console.log(
-        "Added " +
-          phoneItem.brand +
-          " " +
-          phoneItem.model +
-          " for the first time."
-      );
+    if (qty) {
+      qty = parseInt(qty);
+      if (cartItem) {
+        console.log("item count in cart:");
+        console.log(qty + cartItem.count);
+        setCart(
+          //locate existing item and icrease count. Ensure users don't overflow cart.
+          cart.map((x) =>
+            x.id === phoneItem.id
+              ? {
+                  ...cartItem,
+                  count: Number.isSafeInteger(cartItem.count + qty)
+                    ? cartItem.count + qty
+                    : cartItem.count,
+                }
+              : x
+          )
+        );
+        console.log(
+          "Updated product count for: " +
+            phoneItem.brand +
+            " " +
+            phoneItem.model
+        );
+      } else {
+        setCart([...cart, { ...phoneItem, count: qty }]);
+        console.log(
+          "Added " +
+            phoneItem.brand +
+            " " +
+            phoneItem.model +
+            " for the first time."
+        );
+        console.log("Items added:");
+        console.log(qty);
+      }
     }
   };
   //navigate to 'cart' and pass cart content.
@@ -79,7 +88,7 @@ export default function Shop() {
             <Button variant="outline-dark" onClick={handleCart}>
               <BsCartFill style={{ verticalAlign: "sub" }} /> Cart
               <Badge pill bg="dark" style={{ marginLeft: ".2rem" }}>
-                <ItemsCount cart={cart} />
+                {<ItemsCount cart={cart} />}
               </Badge>
             </Button>
           </Navbar.Collapse>

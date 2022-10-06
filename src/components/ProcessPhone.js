@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -6,9 +6,10 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 const Phone = (props) => {
+  const [qty, setQty] = useState(1);
   const { phoneItem, addToCart } = props;
   const handleChange = (e) => {
-    phoneItem.qty = e.target.value;
+    setQty(e.target.value);
   };
   return (
     <article className="phone">
@@ -50,7 +51,7 @@ const Phone = (props) => {
               <Form.Label>Quantity:</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="#"
+                value={qty}
                 min="1"
                 max={Number.MAX_SAFE_INTEGER}
                 size="sm"
@@ -62,7 +63,7 @@ const Phone = (props) => {
           <Button
             size="sm"
             variant="dark"
-            onClick={() => addToCart(phoneItem, phoneItem.qty)}
+            onClick={() => addToCart(phoneItem, qty)}
           >
             Add to cart
           </Button>

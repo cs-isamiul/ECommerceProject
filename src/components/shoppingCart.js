@@ -9,9 +9,9 @@ import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 import CartItem from "./CartItem";
 
-export default function Cart() {
+export default function Cart(props) {
   const location = useLocation();
-  const [cart, setCart] = useState(location.state.cart);
+  const { cart, setCart } = props;
 
   const deleteFromCart = (phoneItem) => {
     setCart((cart) =>
@@ -32,38 +32,6 @@ export default function Cart() {
 
   return (
     <div className="shop">
-      <Navbar bg="light" expand="lg" sticky="top">
-        <Container fluid>
-          <Navbar.Brand href="#">E-shop</Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
-
-              <Link to="/catalog" className="nav-link">
-                Shop
-              </Link>
-
-              <Nav.Link href="#" disabled>
-                About
-              </Nav.Link>
-            </Nav>
-            <Button variant="outline-dark" onClick={handleCart}>
-              <BsCartFill style={{ verticalAlign: "sub" }} /> Cart
-              <Badge pill bg="dark" style={{ marginLeft: ".2rem" }}>
-                <ItemsCount cart={cart} />
-              </Badge>
-            </Button>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-
       <h1>Your Cart</h1>
 
       {cart.length > 0 ? (

@@ -10,10 +10,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 
-export default function Shop() {
-  const [cart, setCart] = useState([]);
-  const [cartSize, setCartSize] = useState();
-
+export default function Shop(props) {
+  const { cart, setCart } = props;
+  console.log(cart);
   const addToCart = (phoneItem, qty) => {
     const cartItem = cart.find((x) => x.id === phoneItem.id);
     //if phoneItem is already in cart, simply increase its count.
@@ -63,38 +62,6 @@ export default function Shop() {
   //console.log("cart:", cart);
   return (
     <div className="shop">
-      <Navbar bg="light" expand="lg" sticky="top">
-        <Container fluid>
-          <Navbar.Brand href="#">E-shop</Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
-
-              <Link to="/catalog" className="nav-link">
-                Shop
-              </Link>
-
-              <Nav.Link href="#" disabled>
-                About
-              </Nav.Link>
-            </Nav>
-            <Button variant="outline-dark" onClick={handleCart}>
-              <BsCartFill style={{ verticalAlign: "sub" }} /> Cart
-              <Badge pill bg="dark" style={{ marginLeft: ".2rem" }}>
-                {<ItemsCount cart={cart} />}
-              </Badge>
-            </Button>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-
       <h1>Item Catalog</h1>
 
       <section className="shoplist">

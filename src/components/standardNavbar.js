@@ -1,6 +1,4 @@
 import { BsCartFill } from "react-icons/bs";
-import { phones } from "./data/phones";
-import FormattedPhoneData from "./ProcessPhone";
 import ItemsCount from "./itemsCount";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
@@ -9,31 +7,35 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
+import Cart from "./cart";
 
-function StandardNavbar() {
-  const location = useLocation();
+const StandardNavbar = (props) => {
+  const { cart, setCart } = props;
+  // const location = useLocation();
 
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    try {
-      setCart(location.state.cart);
-    } catch (error) {
-      console.log("No Previous Cart");
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     setCart(location.state.cart);
+  //   } catch (error) {
+  //     console.log("No Previous Cart");
+  //   }
+  // }, []);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleCart = () => {
-    navigate("/cart", { state: { cart: cart } });
-  };
+  // const handleCart = () => {
+  //   navigate("/cart", { state: { cart: cart } });
+  // };
 
   return (
-    <>
+    <div>
       <Navbar bg="light" expand="lg" sticky="top">
         <Container fluid>
-          <Navbar.Brand href="/">E-shop</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            E-shop
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -41,29 +43,24 @@ function StandardNavbar() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Link to="/" className="nav-link">
+              <Link as={Link} to="/" className="nav-link">
                 Home
               </Link>
 
-              <Link to="/catalog" className="nav-link">
+              <Link as={Link} to="/catalog" className="nav-link">
                 Shop
               </Link>
 
-              <Nav.Link href="#" disabled>
+              <Nav.Link as={Link} to="/about" disabled>
                 About
               </Nav.Link>
             </Nav>
-            <Button variant="outline-dark" onClick={handleCart}>
-              <BsCartFill style={{ verticalAlign: "sub" }} /> Cart
-              <Badge pill bg="dark" style={{ marginLeft: ".2rem" }}>
-                <ItemsCount cart={cart} />
-              </Badge>
-            </Button>
+            <Cart cart={cart} />
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
+    </div>
   );
-}
+};
 
 export default StandardNavbar;

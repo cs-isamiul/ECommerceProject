@@ -2,7 +2,7 @@
 //import "./style.css";
 
 //TODO: add CSS styling
-import React from "react";
+import React, { useState } from "react";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -23,20 +23,30 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 function App() {
+  const [cart, setCart] = useState([]);
   return (
-      <Router>
-        {/* <StandardNavbar /> */}
-            <Routes>
-              <Route exact path="/" element={<Shop />} /> {/* Was home */}
-              <Route path="/catalog" element={<Shop />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/cart/purchase" element={<Purchase />} />
-              <Route path="/cart/shipping" element={<Shipping />} />
-              <Route path="/cart/orderSummary" element={<OrderConfirm />} /> {/* Was orderSummary, but confirm does same thing right now*/}
-              <Route path="/cart/confirmation" element={<OrderConfirm />} />
-              <Route path="*" element={<Error />} />
-            </Routes>
-      </Router>
+    <Router>
+      <StandardNavbar cart={cart} setCart={setCart} />
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<Shop cart={cart} setCart={setCart}></Shop>}
+        />{" "}
+        {/* Was home */}
+        <Route
+          path="/catalog"
+          element={<Shop cart={cart} setCart={setCart} />}
+        />
+        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+        <Route path="/cart/purchase" element={<Purchase />} />
+        <Route path="/cart/shipping" element={<Shipping />} />
+        <Route path="/cart/orderSummary" element={<OrderConfirm />} />{" "}
+        {/* Was orderSummary, but confirm does same thing right now*/}
+        <Route path="/cart/confirmation" element={<OrderConfirm />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </Router>
   );
 }
 

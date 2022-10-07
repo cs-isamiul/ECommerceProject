@@ -15,6 +15,7 @@ import Shipping from "./components/shippingEntry";
 import OrderSummary from "./components/viewOrders";
 import OrderConfirm from "./components/confirmation";
 import StandardNavbar from "./components/standardNavbar";
+import ContactUs from "./components/contactUs";
 
 // Bootstrap CSS
 import "./style.css";
@@ -45,6 +46,7 @@ function App() {
         {/* Was orderSummary, but confirm does same thing right now*/}
         <Route path="/cart/confirmation" element={<OrderConfirm />} />
         <Route path="*" element={<Error />} />
+        <Route path="/contactUs" element={<ContactUs />}/>
       </Routes>
     </Router>
   );

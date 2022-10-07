@@ -1,11 +1,11 @@
-import { BsCartFill } from "react-icons/bs";
-import ItemsCount from "./itemsCount";
+// import { BsCartFill } from "react-icons/bs";
+// import ItemsCount from "./itemsCount";
 import React, { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+// import Container from "react-bootstrap/Container";
+// import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 import CartItem from "./CartItem";
 
@@ -23,9 +23,9 @@ export default function Cart(props) {
 
   //navigate to 'cart/purchase' and pass cart content.
   const navigate = useNavigate();
-  const handleCart = () => {
-    navigate("/cart", { state: { cart: cart } });
-  };
+  // const handleCart = () => {
+  //   navigate("/cart", { state: { cart: cart } });
+  // };
   const handleCheckout = () => {
     navigate("/cart/purchase", { state: { cart: cart } });
   };

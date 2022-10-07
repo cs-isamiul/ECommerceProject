@@ -54,6 +54,10 @@ const StandardNavbar = (props) => {
               <Nav.Link as={Link} to="/about" disabled>
                 About
               </Nav.Link>
+
+              <Nav.Link as={Link} to="/contactUs" className="nav-link">
+                Contact Us
+              </Nav.Link>
             </Nav>
             <Cart cart={cart} />
           </Navbar.Collapse>

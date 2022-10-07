@@ -43,3 +43,39 @@
     width: 50%;
     padding: 10px;
   }
+
+.contact_us_container {
+    width: 35rem;
+    height: 20rem;
+    padding: 1rem 2rem;
+}
+
+.sales_support_container {
+    position: relative;
+    left: 30px;
+    width: 35rem;
+    top: -2rem;
+}
+
+.tech_support_container {
+    position: relative;
+    left: 40rem;
+    width: 35rem;
+    top: -17.5rem;
+}
+
+.tech_support_title_text {
+    position: relative;
+    left: 65px;
+    font-size: x-large;
+}
+.sales_support_title_text {
+    position: relative;
+    left: 55px;
+    font-size: x-large;
+}
+
+.contact_info_text {
+    margin-top: -175px;
+    margin-left: 260px;
+}

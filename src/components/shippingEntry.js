@@ -16,7 +16,6 @@ export default function Shipping() {
     shippingZip: "",
   });
 
-
   const location = useLocation();
   // const getfromPayState = useState(location.state.payState);
   // console.log(getfromPayState);
@@ -38,13 +37,20 @@ export default function Shipping() {
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
-    console.log("line 40 shipping: " + location.state.payState.paymentFirstName);
-    navigate('/cart/confirmation', { state: { cart: location.state.cart, payState: location.state.payState, shipState: shipState } });
-  }
+    console.log(
+      "line 40 shipping: " + location.state.payState.paymentFirstName
+    );
+    navigate("/cart/confirmation", {
+      state: {
+        cart: location.state.cart,
+        payState: location.state.payState,
+        shipState: shipState,
+      },
+    });
+  };
 
   return (
     <>
-      <StandardNavbar />
       <div>
         <Form onSubmit={handleSubmit}>
           <h1>Shipping Information</h1>

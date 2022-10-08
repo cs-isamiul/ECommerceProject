@@ -19,7 +19,7 @@ function Header() {
         border: "none",
         borderRadius: "0px",
         backgroundColor: "#18558b",
-        borderBottom: "0.1rem solid #5a7a9b",
+        borderBottom: "0.1rem solid #000",
         backgroundImage:
           "url(https://hindlaptops.herokuapp.com/static/css/smartphones.a45b5f37f112.jpg)",
         backgroundRepeat: "no-repeat",
@@ -36,7 +36,13 @@ function Header() {
         >
           Unlock your next savings deal & explore the latest technologies
         </Card.Text>
-        <Button variant="primary" size="" as={Link} to="/catalog">
+        <Button
+          variant="primary"
+          size=""
+          as={Link}
+          to="/catalog"
+          style={{ border: "solid 1px #0051c7" }}
+        >
           Start Shopping
         </Button>
       </Card.Body>

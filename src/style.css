@@ -43,3 +43,10 @@
     width: 50%;
     padding: 10px;
   }
+  .footer{
+    background-color: rgb(37, 34, 34);
+    color: #fff;
+  }
+ .footer a {
+     color: #fff !important;
+ }

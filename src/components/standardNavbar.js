@@ -30,36 +30,39 @@ const StandardNavbar = (props) => {
   // };
 
   return (
-    <div>
-      <Navbar bg="light" expand="lg" sticky="top">
-        <Container fluid>
-          <Navbar.Brand as={Link} to="/">
-            E-shop
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Link as={Link} to="/" className="nav-link">
-                Home
-              </Link>
+    <Navbar
+      bg="light"
+      expand="lg"
+      sticky="top"
+      style={{ borderBottom: "0.1rem solid #8c8c8c" }}
+    >
+      <Container fluid>
+        <Navbar.Brand as={Link} to="/">
+          E-shop
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: "100px" }}
+            navbarScroll
+          >
+            <Link as={Link} to="/" className="nav-link">
+              Home
+            </Link>
 
-              <Link as={Link} to="/catalog" className="nav-link">
-                Shop
-              </Link>
+            <Link as={Link} to="/catalog" className="nav-link">
+              Shop
+            </Link>
 
-              <Nav.Link as={Link} to="/about" disabled>
-                About
-              </Nav.Link>
-            </Nav>
-            <Cart cart={cart} />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+            <Nav.Link as={Link} to="/about">
+              About
+            </Nav.Link>
+          </Nav>
+          <Cart cart={cart} />
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

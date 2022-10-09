@@ -59,7 +59,6 @@ export default function Payment() {
                 type="text"
                 name="paymentFirstName"
                 placeholder="First Name"
-                autoComplete={false}
                 onChange={onChange}
               />
             </Form.Group>
@@ -73,7 +72,6 @@ export default function Payment() {
                 type="text"
                 name="paymentLastName"
                 placeholder="Last Name"
-                autoComplete={false}
                 onChange={onChange}
               />
             </Form.Group>
@@ -87,7 +85,6 @@ export default function Payment() {
                 type="text"
                 name="paymentCardNum"
                 placeholder="xxxx-xxxx-xxxx-xxxx"
-                autoComplete={false}
                 onChange={onChange}
               />
             </Form.Group>
@@ -101,7 +98,6 @@ export default function Payment() {
                 type="text"
                 name="paymentCardCVC"
                 placeholder="xxx"
-                autoComplete={false}
                 onChange={onChange}
               />
             </Form.Group>
@@ -115,7 +111,6 @@ export default function Payment() {
                 type="text"
                 name="paymentCardYear"
                 placeholder="xxxx (1950-2030)"
-                autoComplete={false}
                 onChange={onChange}
               />
             </Form.Group>
@@ -129,7 +124,6 @@ export default function Payment() {
                 type="text"
                 name="paymentCardMonth"
                 placeholder="01-12"
-                autoComplete={false}
                 onChange={onChange}
               />
             </Form.Group>

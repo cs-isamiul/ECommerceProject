@@ -1,12 +1,14 @@
 import React from 'react';
+import Cards from './HomeCards';
+import HeroSection from './HomeHeroSection';
 
-export default function Home() {
+function Home() {
   return (
-  <div>
-    <h2>Hello World!</h2>
-    <p>This this the landing page.</p>
-  </div>
+    <>
+      <HeroSection />
+      <Cards />
+    </>
   );
-  //TODO: this is the landing page.
-  // Consider adding features to it or making the items catalog be the landing page.
 }
+
+export default Home;

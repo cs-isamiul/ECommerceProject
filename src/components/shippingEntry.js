@@ -40,7 +40,7 @@ export default function Shipping() {
     console.log(
       "line 40 shipping: " + location.state.payState.paymentFirstName
     );
-    navigate("/cart/confirmation", {
+    navigate("/cart/review", {
       state: {
         cart: location.state.cart,
         payState: location.state.payState,

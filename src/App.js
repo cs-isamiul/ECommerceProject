@@ -18,6 +18,7 @@ import StandardNavbar from "./components/standardNavbar";
 import ContactUs from "./components/contactUs";
 import Footer from "./components/footer";
 import Header from "./components/header";
+import Review from "./components/review";
 
 // Bootstrap CSS
 import "./style.css";
@@ -45,6 +46,7 @@ function App() {
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
         <Route path="/cart/purchase" element={<Purchase />} />
         <Route path="/cart/shipping" element={<Shipping />} />
+        <Route path="/cart/review" element={<Review />} />{" "}
         <Route path="/cart/orderSummary" element={<OrderConfirm />} />{" "}
         {/* Was orderSummary, but confirm does same thing right now*/}
         <Route path="/cart/confirmation" element={<OrderConfirm />} />

@@ -67,4 +67,19 @@ function GenereateItemInfo(props) {
     );
 }
 
-export { GenerateInfoHeader, GenereateItemInfo };
+function GenerateInfoHeaderNew(props) {
+    const { payment, shipping } = props;
+
+
+    return <>
+        <div className="Order Header">
+            <section>
+                <h3>Shipping address: {shipping.shippingFirstName} {shipping.shippingLastName} - {shipping.shippingAddressOne}, {shipping.shippingCity}, {shipping.shippingState}, {shipping.shippingZip}</h3>
+            </section>
+            <section>
+                <h3>Payment Method: {payment.paymentFirstName} {payment.paymentLastName} - Card Number - {payment.paymentCardNum} &emsp; <br/>CVC - {payment.paymentCardCVC} &emsp; Expiration - {payment.paymentCardMonth}/{payment.paymentCardYear}</h3>
+            </section>
+        </div>
+    </>
+}
+export { GenerateInfoHeader, GenereateItemInfo, GenerateInfoHeaderNew };

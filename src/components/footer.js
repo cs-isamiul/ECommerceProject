@@ -45,7 +45,7 @@ export default function Footer() {
               <CDBFooterLink as={Link} to="/about">
                 About Us
               </CDBFooterLink>
-              <CDBFooterLink as={Link} to="/contact">
+              <CDBFooterLink as={Link} to="/contactus">
                 Contact Us
               </CDBFooterLink>
               <CDBFooterLink href="/">Blog</CDBFooterLink>
@@ -63,7 +63,7 @@ export default function Footer() {
               <CDBFooterLink as={Link} to="/contact">
                 Support
               </CDBFooterLink>
-              <CDBFooterLink as={Link} to="/contact">
+              <CDBFooterLink as={Link} to="/contactus">
                 Contact Us
               </CDBFooterLink>
             </CDBBox>

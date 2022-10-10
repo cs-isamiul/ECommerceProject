@@ -19,6 +19,7 @@ import ContactUs from "./components/contactUs";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import Review from "./components/review";
+import AboutUs from "./components/AboutUs";
 
 // Bootstrap CSS
 import "./style.css";
@@ -44,6 +45,8 @@ function App() {
           element={<Shop cart={cart} setCart={setCart} />}
         />
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/cart/purchase" element={<Purchase />} />
         <Route path="/cart/shipping" element={<Shipping />} />
         <Route path="/cart/review" element={<Review />} />{" "}

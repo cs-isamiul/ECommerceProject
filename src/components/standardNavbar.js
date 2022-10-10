@@ -47,7 +47,7 @@ const StandardNavbar = (props) => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Link as={Link} to="/" className="nav-link">
+            <Link as={Link} to="/home" className="nav-link">
               Home
             </Link>
 

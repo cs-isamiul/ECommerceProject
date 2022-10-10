@@ -18,6 +18,7 @@ import StandardNavbar from "./components/standardNavbar";
 import ContactUs from "./components/contactUs";
 import Footer from "./components/footer";
 import Header from "./components/header";
+import AboutUs from "./components/AboutUs"
 
 // Bootstrap CSS
 import "./style.css";
@@ -50,6 +51,8 @@ function App() {
         <Route path="/cart/confirmation" element={<OrderConfirm />} />
         <Route path="*" element={<Error />} />
         <Route path="/contactUs" element={<ContactUs />}/>
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
       <Footer />
     </Router>

@@ -45,39 +45,33 @@
   }
 
 .contact_us_container {
-    width: 35rem;
+    width: 30rem;
     height: 20rem;
-    padding: 1rem 2rem;
+    display: inline-grid;
+    margin-top: 2rem;
+    margin-left: 2.5rem;
+    margin-bottom: 2rem;
 }
 
-.sales_support_container {
-    position: relative;
-    left: 30px;
-    width: 35rem;
-    top: -2rem;
+.contact_us_card_img_container {
+    width: 8rem;
+    margin: 0 auto;
+    margin-top: 1rem;
 }
 
-.tech_support_container {
+.contact_us_card_title_text {
     position: relative;
-    left: 40rem;
-    width: 35rem;
-    top: -17.5rem;
-}
-
-.tech_support_title_text {
-    position: relative;
-    left: 65px;
-    font-size: x-large;
-}
-.sales_support_title_text {
-    position: relative;
-    left: 55px;
-    font-size: x-large;
+    margin: 0 auto;
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
 }
 
 .contact_info_text {
-    margin-top: -175px;
-    margin-left: 260px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 2rem;
+    text-align: center;
 }
   .footer{
     background-color: rgb(37, 34, 34);

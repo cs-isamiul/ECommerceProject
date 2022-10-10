@@ -16,6 +16,8 @@ import OrderSummary from "./components/viewOrders";
 import OrderConfirm from "./components/confirmation";
 import StandardNavbar from "./components/standardNavbar";
 import ContactUs from "./components/contactUs";
+import Footer from "./components/footer";
+import Header from "./components/header";
 
 // Bootstrap CSS
 import "./style.css";
@@ -28,6 +30,7 @@ function App() {
   return (
     <Router>
       <StandardNavbar cart={cart} setCart={setCart} />
+      <Header />
       <Routes>
         <Route
           exact
@@ -48,6 +51,7 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="/contactUs" element={<ContactUs />}/>
       </Routes>
+      <Footer />
     </Router>
   );
 }

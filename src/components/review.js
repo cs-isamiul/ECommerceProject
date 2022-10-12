@@ -16,7 +16,7 @@ function Review() {
         if (redirct) {
             navigate("/catalog");
         }
-    }, [redirct]);
+    }, [redirct, navigate]);
 
     useEffect(() => {
         if (location?.state?.cart && location?.state?.payState && location?.state?.shipState) {

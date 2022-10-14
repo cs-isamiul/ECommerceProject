@@ -7,19 +7,19 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Shop from "./components/shop";
-import Home from "./components/Home";
-import Error from "./components/Error";
+import Home from "./components/home/Home";
+import Error from "./utils/Error";
 import Cart from "./components/shoppingCart";
 import Purchase from "./components/paymentEntry";
 import Shipping from "./components/shippingEntry";
 import OrderSummary from "./components/viewOrders";
 import OrderConfirm from "./components/confirmation";
-import StandardNavbar from "./components/standardNavbar";
+import StandardNavbar from "./utils/standardNavbar";
 import ContactUs from "./components/contactUs";
-import Footer from "./components/footer";
-import Header from "./components/header";
+import Footer from "./utils/footer";
+import Header from "./utils/header";
 import Review from "./components/review";
-import AboutUs from "./components/AboutUs";
+import AboutUs from "./components/aboutUs/AboutUs";
 
 // Bootstrap CSS
 import "./style.css";

@@ -47,7 +47,9 @@
 .contact_us_container {
     width: 30rem;
     height: 20rem;
+    vertical-align: top;
     display: inline-grid;
+    text-align: center;
     margin-top: 2rem;
     margin-left: 2.5rem;
     margin-bottom: 2rem;
@@ -80,3 +82,11 @@
  .footer a {
      color: #fff !important;
  }
+
+ .about {
+    min-height: 100vh;
+    width: 100vw;
+    padding: 100px 50px 50px 50px;
+    background: black;
+    color: rgba(255, 255, 255, 0.8);
+  }

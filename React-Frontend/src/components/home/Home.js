@@ -6,7 +6,7 @@ import YouTube from "./YoutubeEmbed";
 function Home() {
   return (
     <>
-      <HeroSection />
+      <HeroSection/>
       <Cards />
     </>
   );

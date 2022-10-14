@@ -1,5 +1,5 @@
 import { BsCartFill } from "react-icons/bs";
-import ItemsCount from "./itemsCount";
+import ItemsCount from "../utils/itemsCount";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
-import Cart from "./cart";
+import Cart from "../components/cart";
 
 const StandardNavbar = (props) => {
   const { cart, setCart } = props;

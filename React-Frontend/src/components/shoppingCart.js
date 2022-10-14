@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 // import Nav from "react-bootstrap/Nav";
 // import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
-import CartItem from "./CartItem";
+import CartItem from "../utils/CartItem";
 
 export default function Cart(props) {
   const location = useLocation();

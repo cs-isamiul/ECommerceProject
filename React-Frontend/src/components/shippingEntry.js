@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import StandardNavbar from "./standardNavbar";
+// import StandardNavbar from "./standardNavbar";
 
 export default function Shipping() {
   const [shipState, shipSetState] = useState({

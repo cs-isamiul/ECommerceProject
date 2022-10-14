@@ -3,10 +3,10 @@ import { InputGroup } from 'react-bootstrap';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import banner_img from '../data/contact_us_banner.png'
-import sales_support_logo from '../data/sales_support_logo.png'
-import tech_support_logo from '../data/tech_support_logo.png'
-import gps_icon from '../data/gps_icon.png'
+// import banner_img from '../data/contact_us_banner.png'
+import sales_support_logo from '../resources/sales_support_logo.png'
+import tech_support_logo from '../resources/tech_support_logo.png'
+import gps_icon from '../resources/gps_icon.png'
 
 
 export default function contactUs() {

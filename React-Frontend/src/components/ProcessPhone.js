@@ -8,8 +8,11 @@ import Card from "react-bootstrap/Card";
 const Phone = (props) => {
   const [qty, setQty] = useState(1);
   const { phoneItem, addToCart } = props;
+
   const handleChange = (e) => {
-    setQty(e.target.value);
+    e.target.value > phoneItem.invQty
+      ? setQty(phoneItem.invQty)
+      : setQty(e.target.value);
   };
   return (
     <article className="phone">
@@ -53,7 +56,7 @@ const Phone = (props) => {
                 type="number"
                 value={qty}
                 min="1"
-                max={Number.MAX_SAFE_INTEGER}
+                max={phoneItem.invQty}
                 size="sm"
                 onChange={handleChange}
               />

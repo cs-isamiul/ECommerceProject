@@ -1,8 +1,9 @@
 import { BsCartFill } from "react-icons/bs";
-import { phones } from "./data/phones";
+
 import FormattedPhoneData from "./ProcessPhone";
 import ItemsCount from "./itemsCount";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -12,7 +13,16 @@ import Badge from "react-bootstrap/Badge";
 
 export default function Shop(props) {
   const { cart, setCart } = props;
-  console.log(cart);
+  const [inventory, setInventory] = useState([]);
+
+  useEffect(() => {
+    axios({ method: "GET", url: "http://localhost:5000/inventory" }).then(
+      (res) => {
+        setInventory(res.data);
+      }
+    );
+  }, []);
+
   const addToCart = (phoneItem, qty) => {
     const cartItem = cart.find((x) => x.id === phoneItem.id);
     //if phoneItem is already in cart, simply increase its count.
@@ -20,16 +30,21 @@ export default function Shop(props) {
       qty = parseInt(qty);
       if (cartItem) {
         console.log("item count in cart:");
-        console.log(qty + cartItem.count);
+        cartItem.count + qty <= phoneItem.invQty
+          ? console.log(cartItem.count + qty)
+          : console.log(cartItem.count);
+
         setCart(
           //locate existing item and icrease count. Ensure users don't overflow cart.
           cart.map((x) =>
             x.id === phoneItem.id
               ? {
                   ...cartItem,
-                  count: Number.isSafeInteger(cartItem.count + qty)
-                    ? cartItem.count + qty
-                    : cartItem.count,
+                  count:
+                    Number.isSafeInteger(cartItem.count + qty) &&
+                    cartItem.count + qty <= phoneItem.invQty
+                      ? cartItem.count + qty
+                      : cartItem.count,
                 }
               : x
           )
@@ -59,13 +74,13 @@ export default function Shop(props) {
   const handleCart = () => {
     navigate("/cart", { state: { cart: cart } });
   };
-  //console.log("cart:", cart);
+
   return (
     <div className="shop">
       <h1>Item Catalog</h1>
 
       <section className="shoplist">
-        {phones.map((phone) => {
+        {inventory.map((phone) => {
           return (
             <FormattedPhoneData
               key={phone.id}

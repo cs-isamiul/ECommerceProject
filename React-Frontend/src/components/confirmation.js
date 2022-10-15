@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { GenerateInfoHeader, GenereateItemInfo } from "./orderSummaryGenerator";
-import StandardNavbar from "./standardNavbar";
+// import StandardNavbar from "./standardNavbar";
 import "../style.css";
 
 function OrderConfirm() {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import StandardNavbar from "./standardNavbar";
+// import StandardNavbar from "./standardNavbar";
 
 export default function Payment() {
   const location = useLocation();

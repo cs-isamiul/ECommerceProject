@@ -54,7 +54,7 @@ function App() {
         {/* Was orderSummary, but confirm does same thing right now*/}
         <Route path="/cart/confirmation" element={<OrderConfirm />} />
         <Route path="*" element={<Error />} />
-        <Route path="/contactUs" element={<ContactUs />}/>
+        <Route path="/contactUs" element={<ContactUs />} />
       </Routes>
       <Footer />
     </Router>

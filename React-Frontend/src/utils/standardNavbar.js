@@ -54,17 +54,17 @@ const StandardNavbar = (props) => {
             <Link as={Link} to="/catalog" className="nav-link">
               Shop
             </Link>
-              <Nav.Link as={Link} to="/about">
-                About
-              </Nav.Link>
-              <Nav.Link as={Link} to="/contactUs" className="nav-link">
-                Contact Us
-              </Nav.Link>
-            </Nav>
-            <Cart cart={cart} />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+            <Nav.Link as={Link} to="/about">
+              About
+            </Nav.Link>
+            <Nav.Link as={Link} to="/contactUs" className="nav-link">
+              Contact Us
+            </Nav.Link>
+          </Nav>
+          <Cart cart={cart} />
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

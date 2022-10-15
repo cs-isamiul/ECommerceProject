@@ -10,9 +10,7 @@ const Phone = (props) => {
   const { phoneItem, addToCart } = props;
 
   const handleChange = (e) => {
-    e.target.value > phoneItem.invQty
-      ? setQty(phoneItem.invQty)
-      : setQty(e.target.value);
+    e.target.value > phoneItem.invQty ? setQty(qty) : setQty(e.target.value);
   };
   return (
     <article className="phone">

@@ -1,8 +1,9 @@
 import { BsCartFill } from "react-icons/bs";
-import { phones } from "./data/phones";
-import FormattedPhoneData from "./ProcessPhone";
-import ItemsCount from "./itemsCount";
-import React, { useState } from "react";
+
+import FormattedPhoneData from "../utils/ProcessPhone";
+import ItemsCount from "../utils/itemsCount";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";

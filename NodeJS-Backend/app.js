@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
-const inventory = require("./data/phoneSpecifications.json");
 const notFound = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const cors = require("cors");
+const inventory = require("./data/phoneSpecifications.json");
+const apiRoutes = require("./routes/routing");
 // The below is for when we encorperate database
 // const connectDB = require("./db/connect");
 // //access database .env file
@@ -35,6 +36,7 @@ const start = async () => {
 app.use(express.static("./public"));
 app.use(express.json());
 //routes
+app.use("/api/v1/", apiRoutes);
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 

@@ -3,9 +3,9 @@ const asyncWrapper = require("../middleware/async");
 const {BadRequestError} = require("../errors/index");
 
 const createOrder = asyncWrapper(async(req, res)=>{
-    const {order} = req.body
+    const {order} = req.body;
     if(order){
-        console.log(order)
+        console.log(order);
         res.status(200).json({message:"Order was recieved"});
     } else {
         throw new BadRequestError("Order must not be empty");

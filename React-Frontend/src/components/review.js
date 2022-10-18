@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import { GenerateInfoHeaderNew, GenereateItemInfo } from "./orderSummaryGenerator";
 import "../style.css";
@@ -12,12 +13,14 @@ function Review() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    //redirect to catalog if needed
     useEffect(() => {
         if (redirct) {
             navigate("/catalog");
         }
     }, [redirct, navigate]);
 
+    //ensure that customer has a cart, and filled out shipping and payment info
     useEffect(() => {
         if (location?.state?.cart && location?.state?.payState && location?.state?.shipState) {
             setCart(location.state.cart);
@@ -28,14 +31,48 @@ function Review() {
         }
     }, [location])
 
-    const onConfirm = () => {
-        navigate("/cart/confirmation", {
-            state: {
-                cart: cart,
-                payState: payment,
-                shipState: shipping
-            }
-        });
+    //Confirm Order button
+    const onConfirm = async () => {
+        //Make api call to /processorder with order info
+        const axiosCall = ()=> axios({
+            method: "post",
+            url: "http://localhost:5000/processorder",
+            data: {
+                order: {
+                    items: cart,
+                    payment: payment,
+                    shipping: shipping
+                }
+            },
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+        })
+            .then((reply) => {
+                return reply;
+            })
+            .catch((err) => {
+                return err;
+            });
+        
+        //wait for axios call
+        const result = await axiosCall();
+        //201 means order has been entered into database
+        if(result.status == 201){
+            //go to confirmation page
+            navigate("/cart/confirmation", {
+                state: {
+                    cart: cart,
+                    payState: payment,
+                    shipState: shipping,
+                    confirmation: result.data.message
+                }
+            });
+        } else {
+            //for now just print the error into console
+            console.log(result.data.message);
+        }
     }
 
     return <>

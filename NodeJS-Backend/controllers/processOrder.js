@@ -10,6 +10,7 @@ const createOrder = async (req, res) => {
         //extract items, payment and shipping
         const { items, payment, shipping } = order;
         let message = "Confirmation Number";
+        let statusCode = 201;
 
         //TODO: Make this work with path /inventory/single, method does not wait for axios call
         //Make a call to inventory for each item requested
@@ -27,19 +28,20 @@ const createOrder = async (req, res) => {
                     for(let i = 0; i < reply.data.length; i++){
                         //if requested too much, set message as unavailable
                         if (item.qty < 1 || (reply.data[i].id == item.id && reply.data[i].invQty < item.qty)) {
-                            message = "Quantity Unavailable: " + item.id;
+                            message = item.id;
+                            statusCode = 204;
                             break;
                         }
                     }
                 });
                 
-                res.status(200).json({ message: message });
+                res.status(statusCode).json({ message: message });
             })
             .catch((err) => {
                 console.log("Error:" + err);
             });
     } else {
-        throw new BadRequestError("Order must not be empty");
+        res.status(500).json({ message: "Order must not be empty" });
     }
 }
 

@@ -1,6 +1,5 @@
 const inventory = require("../data/phoneSpecifications.json");
 const asyncWrapper = require("../middleware/async");
-const {BadRequestError} = require("../errors/index");
 
 const getAllInventory = asyncWrapper(async(req, res)=>{
     res.send(inventory.filter((phone) => phone.invQty > 0));
@@ -9,7 +8,7 @@ const getAllInventory = asyncWrapper(async(req, res)=>{
 const getSingleItem = asyncWrapper(async(req, res)=>{
     const {id, model} = req.body;
     if(!id && !model){
-        throw new BadRequestError("Must include id or model name");
+        res.status(500).json({message:"Id or Model required"});
     }
 
     const phone = inventory.filter((phone) => phone.id == id || phone.model == model);

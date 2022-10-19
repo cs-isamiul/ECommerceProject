@@ -5,10 +5,9 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 const cors = require("cors");
 
 const apiRoutes = require("./routes/routing");
-// The below is for when we encorperate database
-// const connectDB = require("./db/connect");
-// //access database .env file
-// require("dotenv").config();
+const connectDB = require("./db/connect");
+//access database .env file
+require("dotenv").config();
 
 //middleware
 app.use(express.static("./public"));
@@ -22,7 +21,7 @@ app.use(errorHandlerMiddleware);
 const port = process.env.PORT || 5000;
 const start = async () => {
   try {
-    //await connectDB(process.env.MONGO_URI);
+    await connectDB(process.env.MONGO_URI);
     app.listen(port, () => {
       console.log(">>Server is listening on port " + port);
     });

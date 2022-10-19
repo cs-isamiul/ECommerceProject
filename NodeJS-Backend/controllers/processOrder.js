@@ -1,6 +1,7 @@
 //const Order = require("../models/order");
 const axios = require("axios");
 const asyncWrapper = require("../middleware/async");
+const Task = require("../models/tasks");
 
 const createOrder = async (req, res) => {
     const { order } = req.body;
@@ -46,6 +47,7 @@ const createOrder = async (req, res) => {
 
 const getTest = asyncWrapper(async (req, res) => {
     //console.log(req);
-    res.status(200).json({ message: "Get success!" });
+    const tasks = await Task.find({});
+    res.status(200).json({ tasks });
 })
 module.exports = { getTest, createOrder }

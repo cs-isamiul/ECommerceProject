@@ -4,7 +4,12 @@
 //TODO: add CSS styling
 import React, { useState } from "react";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import Shop from "./components/shop";
 import Home from "./components/home/Home";
@@ -47,12 +52,31 @@ function App() {
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/cart/purchase" element={<Purchase />} />
-        <Route path="/cart/shipping" element={<Shipping />} />
-        <Route path="/cart/review" element={<Review />} />{" "}
-        <Route path="/cart/orderSummary" element={<OrderConfirm />} />{" "}
+        <Route
+          path="/cart/purchase"
+          element={cart.length < 1 ? <Navigate to="/catalog" /> : <Purchase />}
+        />
+        <Route
+          path="/cart/shipping"
+          element={cart.length < 1 ? <Navigate to="/catalog" /> : <Shipping />}
+        />
+        <Route
+          path="/cart/review"
+          element={cart.length < 1 ? <Navigate to="/catalog" /> : <Review />}
+        />{" "}
+        <Route
+          path="/cart/orderSummary"
+          element={
+            cart.length < 1 ? <Navigate to="/catalog" /> : <OrderConfirm />
+          }
+        />{" "}
         {/* Was orderSummary, but confirm does same thing right now*/}
-        <Route path="/cart/confirmation" element={<OrderConfirm />} />
+        <Route
+          path="/cart/confirmation"
+          element={
+            cart.length < 1 ? <Navigate to="/catalog" /> : <OrderConfirm />
+          }
+        />
         <Route path="*" element={<Error />} />
         <Route path="/contactUs" element={<ContactUs />} />
       </Routes>

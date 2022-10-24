@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const SalesInfoSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
     Order: {
         orderTotal: {
             type: String,
@@ -111,4 +111,4 @@ const SalesInfoSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("SalesInfoModel", SalesInfoSchema);
+module.exports = mongoose.model("OrderModel", OrderSchema);

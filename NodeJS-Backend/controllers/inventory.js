@@ -5,6 +5,12 @@ const getAllInventory = asyncWrapper(async(req, res)=>{
     res.send(inventory.filter((phone) => phone.invQty > 0));
 })
 
+//make a request to update, put 
+const updataInventoryDB = asyncWrapper(async(req, res)=>{
+    const {id, qty} = req.body;
+    res.status(200).json({message:"hi"});
+})
+
 const getSingleItem = asyncWrapper(async(req, res)=>{
     const {id, model} = req.body;
     if(!id && !model){
@@ -19,4 +25,4 @@ const getSingleItem = asyncWrapper(async(req, res)=>{
     res.status(200).json(phone[0]);
 })
 
-module.exports = {getAllInventory, getSingleItem}
+module.exports = {getAllInventory, getSingleItem, updataInventoryDB}

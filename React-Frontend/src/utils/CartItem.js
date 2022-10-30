@@ -36,7 +36,7 @@ const CartItem = (props) => {
             {phoneItem.brand} {phoneItem.model}
           </Card.Title>
           <Card.Text>Price: {phoneItem.price}</Card.Text>
-          <Card.Text>Quantity: {phoneItem.count || 1}</Card.Text>
+          <Card.Text>Quantity: {phoneItem.count}</Card.Text>
 
           <Button
             size="sm"

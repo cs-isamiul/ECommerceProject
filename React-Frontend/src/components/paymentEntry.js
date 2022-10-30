@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 // import StandardNavbar from "./standardNavbar";
+import "../style.css";
 
 export default function Payment() {
   const location = useLocation();
@@ -40,14 +41,14 @@ export default function Payment() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     navigate("/cart/shipping", {
-      state: { cart: location.state.cart, payState: payState },
+      state: { payState: payState },
     });
     //     navigate("/cart/shipping", {state:{payState: payState, cart: cart}});
   };
 
   return (
     <>
-      <div>
+      <div className="center">
         <Form onSubmit={handleSubmit}>
           <h1>Payment Information</h1>
 

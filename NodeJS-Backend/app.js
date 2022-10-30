@@ -6,6 +6,16 @@ const cors = require("cors");
 
 const apiRoutes = require("./routes/routing");
 const connectDB = require("./db/connect");
+
+//cross-origin policy to allow catalog to populate items from a different origin.
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credential: true,
+  optionSuccessStatus: 200,
+};
+//enforce policy
+app.use(cors(corsOptions));
+
 //access database .env file
 require("dotenv").config();
 

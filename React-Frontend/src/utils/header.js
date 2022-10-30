@@ -18,7 +18,7 @@ function Header() {
       style={{
         border: "none",
         borderRadius: "0px",
-        backgroundColor: "#18558b",
+        backgroundColor: "#262626",
         borderBottom: "0.1rem solid #000",
         backgroundImage:
           "url(https://hindlaptops.herokuapp.com/static/css/smartphones.a45b5f37f112.jpg)",

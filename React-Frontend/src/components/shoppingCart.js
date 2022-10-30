@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 // import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 import CartItem from "../utils/CartItem";
+import "../style.css";
 
 export default function Cart(props) {
   const location = useLocation();
@@ -31,7 +32,7 @@ export default function Cart(props) {
   };
 
   return (
-    <div className="shop">
+    <div className="center">
       <h1>Your Cart</h1>
 
       {cart.length > 0 ? (

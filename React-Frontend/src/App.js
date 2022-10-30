@@ -43,42 +43,49 @@ function App() {
           exact
           path="/"
           element={<Shop cart={cart} setCart={setCart}></Shop>}
-        />{" "}
-        {/* Was home */}
+        />
+
         <Route
           path="/catalog"
           element={<Shop cart={cart} setCart={setCart} />}
         />
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+
         <Route path="/home" element={<Home />} />
+
         <Route path="/about" element={<AboutUs />} />
+
+        <Route path="/contactUs" element={<ContactUs />} />
+
         <Route
           path="/cart/purchase"
           element={cart.length < 1 ? <Navigate to="/catalog" /> : <Purchase />}
         />
+
         <Route
           path="/cart/shipping"
           element={cart.length < 1 ? <Navigate to="/catalog" /> : <Shipping />}
         />
+
         <Route
           path="/cart/review"
-          element={cart.length < 1 ? <Navigate to="/catalog" /> : <Review />}
-        />{" "}
-        <Route
-          path="/cart/orderSummary"
           element={
-            cart.length < 1 ? <Navigate to="/catalog" /> : <OrderConfirm />
+            cart.length < 1 ? (
+              <Navigate to="/catalog" />
+            ) : (
+              <Review cart={cart} setCart={setCart} />
+            )
           }
-        />{" "}
-        {/* Was orderSummary, but confirm does same thing right now*/}
+        />
+
         <Route
           path="/cart/confirmation"
           element={
             cart.length < 1 ? <Navigate to="/catalog" /> : <OrderConfirm />
           }
         />
+
         <Route path="*" element={<Error />} />
-        <Route path="/contactUs" element={<ContactUs />} />
       </Routes>
       <Footer />
     </Router>

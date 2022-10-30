@@ -57,7 +57,7 @@ function GenereateItemInfo(props) {
                 </div>
                 <Card.Body>
                     <Card.Text>
-                        <p>{item.brand} {item.model} {item.qty} @ {item.price}</p>
+                        <p>{item.brand} {item.model} : {item.count} @ {item.price}</p>
                     </Card.Text>
 
                 </Card.Body>

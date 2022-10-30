@@ -11,40 +11,36 @@ const getAllInventory = asyncWrapper(async(req, res)=>{
 //make a request to update, put 
 const updataInventoryDB = asyncWrapper(async(req, res)=>{
 
+    //req will be {id, quantity}
+    const {id, qty} = req.body;
+    var newQty = 0;
+    await Inventory.find({id: id})
+        .then((result) => {
+            const TargetQuantity= result[0].invQty; //gets the target inventory's quantity in db 
 
-    //this program from line 15 to 24 is used to test if db data is retrievable 
-    var TargetInventoryQty;
-    TargetInventoryQty = await Inventory.find({})
-        .then((result) =>{
-            res.send(result)
-            console.log(result) 
+            newQty = TargetQuantity - qty;  //new quantity will be (target inventory's quantity in db) - the qty that this req wants to delete
+            if(newQty < 0 || qty < 0){
+                return res.status(400).json({message:"Not valid quantity in db or request quantity"});
+            }
+
+            else{
+                Inventory.updateOne({id: id}, {
+                    invQty: newQty
+                })
+                .then((result) => {
+                        res.status(201).json({message:"Successfully updated in database."});
+                    })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).json({message:"There is problem on the server side."});
+                });
+            }
+
         })
         .catch((err)=>{
             console.log(err);
+            res.status(404).json({message:"Couldn't find data"});
         });
-
-
-    // //req will be {id, quantity}
-    // const {id, qty} = req.body;
-    // var TargetInventoryQty;
-    // var newQty;
-    
-    // TargetInventory = await Inventory.find({"id": id})
-    //     .then((result) => {
-    //         TargetQuantity= TargetInventory.invQty; //gets the target inventory's quantity in db 
-    //         console.log("origin value " +  TargetInventoryQty); //for debug purpose
-    //         newQty = TargetInventoryQty - qty;  //new quantity will be (target inventory's quantity in db) - the qty that this req wants to delete
-    //         console.log("newQty value " +  newQty);  //for debug purpose
-    //     })
-    //     .catch((err)=>{
-    //         console.log(err);
-    //     });
-    // await Inventory.findByIdAndUpdate(TargetInventory.id, {
-    //     invQty: newQty
-    // });
-    // res.send('Item Upadated!');
-
-
 });
 
 const getSingleItem = asyncWrapper(async(req, res)=>{

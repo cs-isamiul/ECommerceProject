@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "img": "https://m.media-amazon.com/images/I/611ovP2GkrL._FMwebp__.jpg",
     "brand": "Apple",
     "model": "iPhone 13 Pro Max",
@@ -12,7 +12,7 @@
     "invQty": 500
   },
   {
-    "id": 2,
+    "id": "2",
     "img": "https://m.media-amazon.com/images/I/71RxOftVoQL._AC_SL1500_.jpg",
     "brand": "Samsung",
     "model": "Galaxy S20 FE 5G",
@@ -24,7 +24,7 @@
     "invQty": 50
   },
   {
-    "id": 3,
+    "id": "3",
     "img": "https://m.media-amazon.com/images/I/71Q0E2DYf2L._AC_SL1500_.jpg",
     "brand": "Apple",
     "model": "iPhone 12",
@@ -36,7 +36,7 @@
     "invQty": 20
   },
   {
-    "id": 4,
+    "id": "4",
     "img": "https://m.media-amazon.com/images/I/61L3cGj7I6L._AC_SL1500_.jpg",
     "brand": "LG",
     "model": "V50 ThinQ 5G LM-V450",
@@ -48,7 +48,7 @@
     "invQty": 5
   },
   {
-    "id": 5,
+    "id": "5",
     "img": "https://m.media-amazon.com/images/I/61FHIXy334L._AC_SL1000_.jpg",
     "brand": "Samsung",
     "model": "Galaxy Note 20 5G ",

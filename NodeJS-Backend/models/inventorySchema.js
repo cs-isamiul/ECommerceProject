@@ -60,10 +60,10 @@ const InventorySchema = new mongoose.Schema({
         maxLength:[20, "condition cannot exceed 20 characters"],
     },
 
-    invQty:{
-        type: Number,
-        required:[true, "Must provide inventory quantity"]
-    }
+    invQty: {
+        type:Number,
+        required:[true, "Must provide invQty"], //you can pass it as just true, then you wouldn't get the custom message
+    },
 
 
 });

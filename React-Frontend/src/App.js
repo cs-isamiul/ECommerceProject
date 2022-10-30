@@ -40,7 +40,8 @@ function App() {
       <Header />
       <Routes>
         <Route
-          exact path="/"
+          exact
+          path="/"
           element={<Shop cart={cart} setCart={setCart}></Shop>}
         />
 
@@ -48,21 +49,13 @@ function App() {
           path="/catalog"
           element={<Shop cart={cart} setCart={setCart} />}
         />
-        <Route 
-        path="/cart" 
-        element={<Cart cart={cart} setCart={setCart} />} />
-        
-        <Route 
-        path="/home" 
-        element={<Home />} />
-        
-        <Route 
-        path="/about" 
-        element={<AboutUs />} />
-        
-        <Route 
-        path="/contactUs" 
-        element={<ContactUs />} />
+        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+
+        <Route path="/home" element={<Home />} />
+
+        <Route path="/about" element={<AboutUs />} />
+
+        <Route path="/contactUs" element={<ContactUs />} />
 
         <Route
           path="/cart/purchase"
@@ -76,12 +69,20 @@ function App() {
 
         <Route
           path="/cart/review"
-          element={cart.length < 1 ? <Navigate to="/catalog" /> : <Review cart={cart} setCart={setCart}/>}
+          element={
+            cart.length < 1 ? (
+              <Navigate to="/catalog" />
+            ) : (
+              <Review cart={cart} setCart={setCart} />
+            )
+          }
         />
 
         <Route
           path="/cart/confirmation"
-          element={<OrderConfirm />}
+          element={
+            cart.length < 1 ? <Navigate to="/catalog" /> : <OrderConfirm />
+          }
         />
 
         <Route path="*" element={<Error />} />

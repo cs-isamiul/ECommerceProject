@@ -14,7 +14,7 @@ const updataInventoryDB = asyncWrapper(async(req, res)=>{
 
     //this program from line 15 to 24 is used to test if db data is retrievable 
     var TargetInventoryQty;
-    TargetInventoryQty = Inventory.find()
+    TargetInventoryQty = await Inventory.find({})
         .then((result) =>{
             res.send(result)
             console.log(result) 

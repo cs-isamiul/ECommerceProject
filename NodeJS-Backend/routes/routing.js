@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const {getTest, createOrder} = require("../controllers/processOrder");
-const {getAllInventory, getSingleItem} = require("../controllers/inventory");
+const { getTest, createOrder } = require("../controllers/processOrder");
+const { getAllInventory, getSingleItem } = require("../controllers/inventory");
 
 router.route("/processorder").get(getTest).post(createOrder);
 router.route("/inventory").get(getAllInventory);

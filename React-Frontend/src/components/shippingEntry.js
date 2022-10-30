@@ -42,7 +42,6 @@ export default function Shipping() {
     );
     navigate("/cart/review", {
       state: {
-        cart: location.state.cart,
         payState: location.state.payState,
         shipState: shipState,
       },

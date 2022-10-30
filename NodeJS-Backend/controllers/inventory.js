@@ -1,6 +1,6 @@
 const inventory = require("../data/phoneSpecifications.json");
 const asyncWrapper = require("../middleware/async");
-const Inventory = require("../models/inventorySchema")
+const Inventory = require("../models/Inventory")
 const mongoose = require('mongoose');
 
 

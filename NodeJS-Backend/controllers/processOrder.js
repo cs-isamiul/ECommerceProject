@@ -1,7 +1,10 @@
 //const Order = require("../models/order");
 const axios = require("axios");
 const asyncWrapper = require("../middleware/async");
-const Task = require("../models/tasks");
+const CUSTOMER_INFO_DB = require("../models/Customer-Info");
+const OrderDB = CUSTOMER_INFO_DB.order;
+const PaymentDB = CUSTOMER_INFO_DB.payment;
+const ShippingDB = CUSTOMER_INFO_DB.shipping;
 
 const createOrder = async (req, res) => {
     const { order } = req.body;
@@ -46,8 +49,11 @@ const createOrder = async (req, res) => {
 }
 
 const getTest = asyncWrapper(async (req, res) => {
-    //console.log(req);
-    const tasks = await Task.find({});
-    res.status(200).json({ tasks });
+    console.log(req);
+    const db1 = await OrderDB.find({});
+    const db2 = await PaymentDB.find({});
+    const db3 = await ShippingDB.find({});
+
+    res.status(200).json({db1, db2, db3});
 })
 module.exports = { getTest, createOrder }

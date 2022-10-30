@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { getTest, createOrder } = require("../controllers/processOrder");
-const { getAllInventory, getSingleItem } = require("../controllers/inventory");
+const { getAllInventory, getSingleItem, updataInventoryDB } = require("../controllers/inventory");
 
 router.route("/processorder")
     .get(getTest)

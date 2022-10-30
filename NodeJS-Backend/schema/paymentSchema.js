@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const OrderSchema = new mongoose.Schema({
+const PaymentSchema = new mongoose.Schema({
     paymentInfo: {
         paymentFirstName: {
             type: String,   
@@ -35,4 +35,4 @@ const OrderSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Payment", PaymentSchema);
+module.exports = PaymentSchema;

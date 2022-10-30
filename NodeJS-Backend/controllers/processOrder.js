@@ -32,11 +32,15 @@ const createOrder = async (req, res) => {
                         //if requested too much, set message as unavailable
                         if (item.qty < 1 || (reply.data[i].id == item.id && reply.data[i].invQty < item.qty)) {
                             message = item.id;
-                            statusCode = 204;
+                            statusCode = 500;
                             break;
                         }
                     }
                 });
+                
+                //If not 201 then requested too many items
+                //below here is where you put db creations
+                
                 
                 res.status(statusCode).json({ message: message });
             })

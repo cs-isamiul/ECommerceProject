@@ -24,7 +24,7 @@ function OrderConfirm() {
   }, [redirct, navigate]);
 
   useEffect(() => {
-    if (location?.state.confirmation && location?.state.payState && location?.state?.shipState && location?.state?.cart) {
+    if (location?.state?.confirmation && location?.state?.payState && location?.state?.shipState && location?.state?.cart && location.state.cart.length > 0) {
       setPayment(location.state.payState);
       setShipping(location.state.shipState);
       setConfirmation(location.state.confirmation);
@@ -37,7 +37,7 @@ function OrderConfirm() {
       }));
 
     } else {
-      //setRedirct(true);
+      setRedirct(true);
     }
   }, [location]);
 

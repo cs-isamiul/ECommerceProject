@@ -80,8 +80,7 @@ function App() {
 
         <Route
           path="/cart/confirmation"
-          element={
-            cart.length < 1 ? <Navigate to="/catalog" /> : <OrderConfirm />
+          element={<OrderConfirm />
           }
         />
 

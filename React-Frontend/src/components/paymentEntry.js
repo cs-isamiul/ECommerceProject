@@ -40,7 +40,7 @@ export default function Payment() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     navigate("/cart/shipping", {
-      state: { cart: location.state.cart, payState: payState },
+      state: { payState: payState },
     });
     //     navigate("/cart/shipping", {state:{payState: payState, cart: cart}});
   };

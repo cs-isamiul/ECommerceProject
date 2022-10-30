@@ -28,7 +28,7 @@ export default function Shop(props) {
     //if phoneItem is already in cart, simply increase its count.
     if (qty) {
       qty = parseInt(qty);
-      if (cartItem) {
+      if (cartItem && qty > 0) {
         console.log("item count in cart:");
         cartItem.count + qty <= phoneItem.invQty
           ? console.log(cartItem.count + qty)

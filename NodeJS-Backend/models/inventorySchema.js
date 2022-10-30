@@ -1,6 +1,6 @@
 //database stuff
 
-const mongoose = require('INVENTORY');
+const mongoose = require('mongoose');
 
 //these two are the only data fields that can be passed into the database
 //doing it this way has no validation, for more options use the next one

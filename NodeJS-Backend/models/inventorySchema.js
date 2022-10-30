@@ -63,6 +63,7 @@ const InventorySchema = new mongoose.Schema({
     invQty: {
         type:Number,
         required:[true, "Must provide invQty"], //you can pass it as just true, then you wouldn't get the custom message
+        min: [0,"Inventory quantity should be greater or quale to zero"]
     },
 
 

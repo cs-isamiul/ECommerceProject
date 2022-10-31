@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
         //Go through all sent items and check inventory status
         for (i = 0; i < items.length; i++) {
             const inventoryItem = await AxiosGETSingle(items[i].id);
-            if (!inventoryItem?.invQty) {
+            if (!inventoryItem?.invQty && inventoryItem.invQty - qty > 0) {
                 //If invalid qty or some other error
                 return res.status(406).json({ message: "Invalid", id: items[i].id });
             }

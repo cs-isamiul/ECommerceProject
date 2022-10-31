@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 
 
 const getAllInventory = asyncWrapper(async(req, res)=>{
-    res.send(inventory.filter((phone) => phone.invQty > 0));
+    const inventory = await Inventory.find({});
+    res.status(200).json({inventory:inventory});
 })
 
 //make a request to update, put 
@@ -44,17 +45,20 @@ const updataInventoryDB = asyncWrapper(async(req, res)=>{
 });
 
 const getSingleItem = asyncWrapper(async(req, res)=>{
-    const {id, model} = req.body;
-    if(!id && !model){
-        res.status(500).json({message:"Id or Model required"});
+    // console.log("Inventory was called");
+    const {id} = req.body;
+    var phone = [];
+    if(id){
+        phone = await Inventory.find({id:String(id)});
+    } else {
+        return res.status(400).json({message:"No id or model"});
     }
 
-    const phone = inventory.filter((phone) => phone.id == id || phone.model == model);
-    if(phone.length < 1){
-        return res.status(404).json({message:"No phones found"});
+    if(phone.length == 0){
+        return res.status(204).json({message:"Nothing found"});
     }
 
-    res.status(200).json(phone[0]);
+    res.status(200).json(phone);
 })
 
 module.exports = {getAllInventory, getSingleItem, updataInventoryDB}

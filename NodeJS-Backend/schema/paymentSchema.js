@@ -17,7 +17,7 @@ const PaymentSchema = new mongoose.Schema({
             required:[true], 
             trim:true,
         },
-        paymentCardCVC: {
+        paymentCVC: {
             type: String,  
             required:[true], 
             trim:true,

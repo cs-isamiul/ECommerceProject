@@ -2,42 +2,42 @@ const mongoose = require('mongoose');
 
 const ShippingSchema = new mongoose.Schema({
     shippingInfo: {
-        firstName: {
+        shippingFirstName: {
             type: String,
             required:[true],
             trim:true,
         },
-        lastName: {
+        shippingLastName: {
             type: String,
             required:[true],
             trim:true,
         },
-        phoneNumber: {
+        shippingPhoneNumber: {
             type: String,
             required:[true],
             trim:true,
         },
-        address1: {
+        shippingAddressOne: {
             type: String,
             required:[true],
             trim:true,
         },
-        address2: {
+        shippingAddressTwo: {
             type: String,
             required:[false],
             trim:true,
         },
-        city: {
+        shippingCity: {
             type: String,
             required:[true],
             trim:true,
         },
-        state: {
+        shippingState: {
             type: String,
             required:[true],
             trim:true,
         },
-        zipCode: {
+        shippingZip: {
             type: String,
             required:[true],
             trim:true,

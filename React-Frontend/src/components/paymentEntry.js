@@ -8,14 +8,13 @@ import "../style.css";
 
 export default function Payment() {
   const location = useLocation();
-
   const [payState, setPayState] = useState({
-    paymentFirstName: "",
-    paymentLastName: "",
-    paymentCardNum: "",
-    paymentCardCVC: "",
-    paymentCardYear: "",
-    paymentCardMonth: "",
+    paymentFirstName: location?.state?.payment?.paymentFirstName || "",
+    paymentLastName: location?.state?.payment?.paymentLastName || "",
+    paymentCardNum: location?.state?.payment?.paymentCardNum || "",
+    paymentCardCVC: location?.state?.payment?.paymentCardCVC || "",
+    paymentCardYear: location?.state?.payment?.paymentCardYear || "",
+    paymentCardMonth: location?.state?.payment?.paymentCardMonth || "",
   });
 
   //const cart = location.state.cart;
@@ -41,7 +40,7 @@ export default function Payment() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     navigate("/cart/shipping", {
-      state: { payState: payState },
+      state: { payState: payState, shipping: location?.state?.shipState },
     });
     //     navigate("/cart/shipping", {state:{payState: payState, cart: cart}});
   };
@@ -61,6 +60,7 @@ export default function Payment() {
                 name="paymentFirstName"
                 placeholder="First Name"
                 onChange={onChange}
+                value={payState.paymentFirstName || ""}
               />
             </Form.Group>
           </Col>
@@ -74,6 +74,7 @@ export default function Payment() {
                 name="paymentLastName"
                 placeholder="Last Name"
                 onChange={onChange}
+                value={payState.paymentLastName || ""}
               />
             </Form.Group>
           </Col>
@@ -87,6 +88,7 @@ export default function Payment() {
                 name="paymentCardNum"
                 placeholder="xxxx-xxxx-xxxx-xxxx"
                 onChange={onChange}
+                value={payState.paymentCardNum || ""}
               />
             </Form.Group>
           </Col>
@@ -100,6 +102,7 @@ export default function Payment() {
                 name="paymentCardCVC"
                 placeholder="xxx"
                 onChange={onChange}
+                value={payState.paymentCardCVC || ""}
               />
             </Form.Group>
           </Col>
@@ -113,6 +116,7 @@ export default function Payment() {
                 name="paymentCardYear"
                 placeholder="xxxx (1950-2030)"
                 onChange={onChange}
+                value={payState.paymentCardYear || ""}
               />
             </Form.Group>
           </Col>
@@ -126,6 +130,7 @@ export default function Payment() {
                 name="paymentCardMonth"
                 placeholder="01-12"
                 onChange={onChange}
+                value={payState.paymentCardMonth || ""}
               />
             </Form.Group>
           </Col>

@@ -1,26 +1,28 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 // import StandardNavbar from "./standardNavbar";
 import "../style.css";
 
 export default function Shipping() {
-  const [shipState, shipSetState] = useState({
-    shippingFirstName: "",
-    shippingLastName: "",
-    shippingPhoneNumber: "",
-    shippingAddressOne: "",
-    shippingAddressTwo: "",
-    shippingCity: "",
-    shippingState: "",
-    shippingZip: "",
-  });
-
   const location = useLocation();
+  const [shipState, shipSetState] = useState({
+    shippingFirstName: location?.state?.shipping?.shippingFirstName || "",
+    shippingLastName: location?.state?.shipping?.shippingLastName || "",
+    shippingPhoneNumber: location?.state?.shipping?.shippingPhoneNumber || "",
+    shippingAddressOne: location?.state?.shipping?.shippingAddressOne || "",
+    shippingAddressTwo: location?.state?.shipping?.shippingAddressTwo || "",
+    shippingCity: location?.state?.shipping?.shippingCity || "",
+    shippingState: location?.state?.shipping?.shippingState || "",
+    shippingZip: location?.state?.shipping?.shippingZip || "",
+  });
+  console.log(shipState);
   // const getfromPayState = useState(location.state.payState);
   // console.log(getfromPayState);
-
+  useEffect(() => {
+    shipSetState(shipState);
+  }, []);
   const onChange = (e) => {
     /*
       used to set state of 
@@ -65,6 +67,7 @@ export default function Shipping() {
                 placeholder="First Name"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingFirstName || ""}
               />
             </Form.Group>
           </Col>
@@ -79,6 +82,7 @@ export default function Shipping() {
                 placeholder="Last Name"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingLastName || ""}
               />
             </Form.Group>
           </Col>
@@ -93,6 +97,7 @@ export default function Shipping() {
                 placeholder="*** - *** ****"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingPhoneNumber || ""}
               />
             </Form.Group>
           </Col>
@@ -107,6 +112,7 @@ export default function Shipping() {
                 placeholder="Address 1"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingAddressOne || ""}
               />
             </Form.Group>
           </Col>
@@ -121,6 +127,7 @@ export default function Shipping() {
                 placeholder="Address 2"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingAddressTwo || ""}
               />
             </Form.Group>
           </Col>
@@ -135,6 +142,7 @@ export default function Shipping() {
                 placeholder="City"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingCity || ""}
               />
             </Form.Group>
           </Col>
@@ -149,6 +157,7 @@ export default function Shipping() {
                 placeholder="State"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingState || ""}
               />
             </Form.Group>
           </Col>
@@ -163,6 +172,7 @@ export default function Shipping() {
                 placeholder="Zip Code"
                 autoComplete={false}
                 onChange={onChange}
+                value={shipState.shippingZip || ""}
               />
             </Form.Group>
           </Col>

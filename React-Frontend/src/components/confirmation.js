@@ -24,6 +24,7 @@ function OrderConfirm() {
   }, [redirct, navigate]);
 
   useEffect(() => {
+    console.log(location);
     if (location?.state?.confirmation && location?.state?.payState && location?.state?.shipState && location?.state?.cart && location.state.cart.length > 0) {
       setPayment(location.state.payState);
       setShipping(location.state.shipState);
@@ -54,14 +55,15 @@ function OrderConfirm() {
       <section>
         <h3>Expected Delivery Date: Lab 9 Microservice Call</h3>
       </section>
-
-      <section className="shoplist">
-        {cart.map((phone, index) => {
-          console.log(phone);
-          return <GenereateItemInfo key={index} item={phone} />;
-        })}
-      </section>
-      <hr/>
+    </div>
+    <section className="shoplist" style={{ marginLeft: "5rem" }}>
+      {cart.map((phone, index) => {
+        console.log(phone);
+        return <GenereateItemInfo key={index} item={phone} />;
+      })}
+    </section>
+    <div className="center">
+      <hr />
       <section>
         <h2>Payment Summary #{confirmation}</h2>
         <h2>Subtotal: ${total}</h2>

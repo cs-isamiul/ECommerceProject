@@ -32,12 +32,12 @@ export default function Cart(props) {
   };
 
   return (
-    <div className="center">
+    <div>
       <h1>Your Cart</h1>
 
       {cart.length > 0 ? (
         <React.Fragment>
-          <Button variant="outline-dark" onClick={handleCheckout}>
+          <Button variant="outline-dark" onClick={handleCheckout} style={{ marginLeft: "10%"}}>
             Proceed to Checkout
             <Badge pill bg="dark" style={{ marginLeft: ".2rem" }}></Badge>
           </Button>

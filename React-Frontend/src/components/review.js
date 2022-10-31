@@ -20,6 +20,8 @@ function Review(props) {
   //calculate total, probably remove later
   {
     cart.map((phone, index) => {
+      console.log(">>>>>>>>>>>>>>>>>")
+      console.log(phone);
       total += Number(phone.price.slice(1)) * phone.count;
     });
   }
@@ -44,18 +46,22 @@ function Review(props) {
     } else {
       setRedirct(true);
     }
-  }, [location]);
+  }, [location, props?.cart]);
 
   //Confirm Order button
   const onConfirm = async () => {
     //Make api call to /processorder with order info
+    var items = cart.map((phone, index) => {
+      return {id: phone.id, qty: phone.count}
+    })
+
     const axiosCall = () =>
       axios({
         method: "post",
         url: "http://localhost:5000/processorder",
         data: {
           order: {
-            items: cart,
+            items: items,
             payment: payment,
             shipping: shipping,
           },
@@ -66,9 +72,11 @@ function Review(props) {
         },
       })
         .then((reply) => {
+          console.log("inside axios");
           return reply;
         })
         .catch((err) => {
+          console.log("inside axios");
           return err;
         });
 
@@ -84,20 +92,20 @@ function Review(props) {
           cart: cartCopy,
           payState: payment,
           shipState: shipping,
-          confirmation: result.data.message,
+          confirmation: result?.data?.confirmation,
           totalTemp: total,
         },
       });
     } else {
       //for now just print the error into console
-      console.log(result.data.message);
+      console.log(result?.data);
     }
   };
 
   return (
     <>
       <div className="center">
-        <h1>Please Review and Confirm that your information</h1>
+        <h1>Please Review and Confirm your information</h1>
         <section>
           <GenerateInfoHeaderNew payment={payment} shipping={shipping} />
           <button
@@ -126,11 +134,13 @@ function Review(props) {
             Edit Shipping Info
           </button>
         </section>
-        <section className="shoplist">
-          {cart.map((phone, index) => {
-            return <GenereateItemInfo key={index} item={phone} />;
-          })}
-        </section>
+      </div>
+      <section className="shoplist" style={{ marginLeft: "5rem" }}>
+        {cart.map((phone, index) => {
+          return <GenereateItemInfo key={index} item={phone} />;
+        })}
+      </section>
+      <div className="center">
         <hr />
         <section>
           <h2>Subtotal: ${total}</h2>

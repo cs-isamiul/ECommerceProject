@@ -18,7 +18,7 @@ export default function Shop(props) {
   useEffect(() => {
     axios({ method: "GET", url: "http://localhost:5000/inventory" }).then(
       (res) => {
-        setInventory(res.data);
+        setInventory(res.data.inventory);
       }
     );
   }, []);

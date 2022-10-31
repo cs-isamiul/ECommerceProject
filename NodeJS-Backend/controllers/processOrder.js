@@ -36,6 +36,17 @@ const createOrder = async (req, res) => {
 
         //TODO Properly validate this stuff with schema
         //TODO if shipping & payment already exist, just point to it
+        for(var key in payment){
+            if(payment[key].length == 0){
+                return res.status(400).json({messsage:"Payment cannot be empty"});
+            }
+        }
+
+        for(var key in shipping){
+            if(shipping[key].length == 0){
+                return res.status(400).json({messsage:"Shipping cannot be empty"});
+            }
+        }
 
         if (payment?.paymentFirstName && payment?.paymentLastName && payment?.paymentCardNum && payment?.paymentCardCVC && payment?.paymentCardYear && payment?.paymentCardMonth) {
             if (shipping?.shippingFirstName && shipping?.shippingLastName && shipping?.shippingPhoneNumber && shipping?.shippingAddressOne && shipping?.shippingCity && shipping?.shippingState && shipping?.shippingZip) {

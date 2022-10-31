@@ -20,8 +20,6 @@ function Review(props) {
   //calculate total, probably remove later
   {
     cart.map((phone, index) => {
-      console.log(">>>>>>>>>>>>>>>>>")
-      console.log(phone);
       total += Number(phone.price.slice(1)) * phone.count;
     });
   }
@@ -72,18 +70,16 @@ function Review(props) {
         },
       })
         .then((reply) => {
-          console.log("inside axios");
           return reply;
         })
         .catch((err) => {
-          console.log("inside axios");
           return err;
         });
 
     //wait for axios call
     const result = await axiosCall();
     //201 means order has been entered into database
-    if (result.status == 201) {
+    if (result?.status == 201) {
       const cartCopy = cart;
       setCart([]);
       //go to confirmation page
@@ -98,7 +94,7 @@ function Review(props) {
       });
     } else {
       //for now just print the error into console
-      console.log(result?.data);
+      alert("Error: " + result.message)
     }
   };
 

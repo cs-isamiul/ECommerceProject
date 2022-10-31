@@ -41,6 +41,11 @@ function Review(props) {
     ) {
       setPayment(location.state.payState);
       setShipping(location.state.shipState);
+      setShipping((prevState) => ({
+        ...prevState,
+        shippingAddressTwo: " "
+      }))
+
     } else {
       setRedirct(true);
     }
@@ -93,6 +98,7 @@ function Review(props) {
         },
       });
     } else {
+      console.log(result);
       //for now just print the error into console
       alert("Error: " + result.message)
     }

@@ -17,13 +17,15 @@ const createOrder = async (req, res) => {
     // console.log(order);
     //extract items, payment and shipping
     const { items, payment, shipping } = order;
-
     //Go through all sent items and check inventory status
     for (i = 0; i < items.length; i++) {
       const inventoryItem = await AxiosGETSingle(items[i].id);
-      if (!inventoryItem?.invQty && inventoryItem.invQty - qty > 0) {
+      if (!inventoryItem?.invQty || inventoryItem.invQty - order.qty < 0) {
         //If invalid qty or some other error
-        return res.status(406).json({ message: "Invalid", id: items[i].id });
+        return res.status(406).json({
+          message: "looks like some of your items may be out of stock.",
+          id: items[i].id,
+        });
       }
     }
 
@@ -61,7 +63,6 @@ const createOrder = async (req, res) => {
                 items[i].id,
                 items[i].qty
               );
-              //TODO, if response is not 201, roll back changes
               if (response !== 201) {
                 console.log(
                   "Didn't update the inventory qty. Rollback all associated transactions."

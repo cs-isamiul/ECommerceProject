@@ -81,13 +81,15 @@ export default function Shop(props) {
 
       <section className="shoplist">
         {inventory.map((phone) => {
-          return (
-            <FormattedPhoneData
-              key={phone.id}
-              phoneItem={phone}
-              addToCart={addToCart}
-            ></FormattedPhoneData>
-          );
+          if (phone.invQty >= 0) {
+            return (
+              <FormattedPhoneData
+                key={phone.id}
+                phoneItem={phone}
+                addToCart={addToCart}
+              ></FormattedPhoneData>
+            );
+          }
         })}
       </section>
     </div>

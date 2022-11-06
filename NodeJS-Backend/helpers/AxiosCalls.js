@@ -39,4 +39,24 @@ async function AxiosPUTUpdateCount(id, qty) {
     });
     return response;
 };
-module.exports = {AxiosGETSingle, AxiosPUTUpdateCount};
+
+async function AxiosGetStartShipping(businessEntity, shippingInfo) {
+    let response = await axios({
+        method: "put",
+        url: "http://localhost:5000/ProcessShipment",
+        data: {
+            "businessEntity": businessEntity,
+            "shippingInfo": shippingInfo
+        },
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+    }).then((reply) => {
+        return reply.status;
+    }).catch((err) => {
+        return err.response.status;
+    });
+    return response;
+};
+module.exports = {AxiosGETSingle, AxiosPUTUpdateCount, AxiosGetStartShipping};

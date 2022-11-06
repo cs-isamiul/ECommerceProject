@@ -112,18 +112,16 @@ const createOrder = async (req, res) => {
         }
       } else {
         console.log("Empty shipping info");
-        return res
-          .status(400)
-          .json({ message: "Could not insert order, missing info" });
+        return res.status(400).json({ message: "Shipping cannot be empty!" });
       }
     } else {
       console.log("Empty payment info");
-      return res.status(400).json({ messsage: "Payment cannot be empty" });
+      return res.status(400).json({ message: "Payment cannot be empty!" });
     }
 
     for (var key in shipping) {
       if (shipping[key].length == 0) {
-        return res.status(400).json({ messsage: "Shipping cannot be empty" });
+        return res.status(400).json({ message: "Shipping cannot be empty" });
       }
     }
   } else {

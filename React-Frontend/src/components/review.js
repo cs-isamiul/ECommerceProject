@@ -97,9 +97,9 @@ function Review(props) {
         },
       });
     } else {
-      console.log(result.data);
+      console.log(result.response.data.message);
       //for now just print the error into console
-      alert("Error: " + result.message);
+      alert("Error: " + result.response.data.message);
     }
   };
 

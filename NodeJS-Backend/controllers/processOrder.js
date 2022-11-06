@@ -5,35 +5,32 @@ const CUSTOMER_INFO_DB = require("../models/Customer-Info");
 const OrderDB = CUSTOMER_INFO_DB.order;
 const PaymentDB = CUSTOMER_INFO_DB.payment;
 const ShippingDB = CUSTOMER_INFO_DB.shipping;
-const { AxiosGETSingle, AxiosPUTUpdateCount } = require("../helpers/AxiosCalls");
+const { AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTPaymentProcessing } = require("../helpers/AxiosCalls");
+const { createProcessPayment } = require('./payment-processing-controller');
+const { getSingleItem } = require("./inventory");
 
 const createOrder = async (req, res) => {
     const { order } = req.body;
     //check to make sure order has items and later other fields
     if (order?.items && order?.payment && order?.shipping) {
-        // console.log(">>>>>>>>>>>>>>>>>>>>>>>");
-        // console.log(order);
         //extract items, payment and shipping
         const { items, payment, shipping } = order;
-
         //Go through all sent items and check inventory status
         for (i = 0; i < items.length; i++) {
             const inventoryItem = await AxiosGETSingle(items[i].id);
-            if (!inventoryItem?.invQty && inventoryItem.invQty - qty > 0) {
+            if (!inventoryItem?.invQty && inventoryItem.invQty - items[i].qty > 0) {
                 //If invalid qty or some other error
                 return res.status(406).json({ message: "Invalid", id: items[i].id });
             }
         }
-
         //All qty validated, decrement qty from DB
         for (i = 0; i < items.length; i++) {
             const response = await AxiosPUTUpdateCount(items[i].id, items[i].qty);
             //TODO, if response is not 201, roll back changes
             if (response !== 201) {
-                return res.status(500).json({ message: "Failed to update DB" })
+                return res.status(500).json({ message: "Not enough inventory" })
             }
         }
-
         //TODO Properly validate this stuff with schema
         //TODO if shipping & payment already exist, just point to it
         for(var key in payment){
@@ -41,14 +38,19 @@ const createOrder = async (req, res) => {
                 return res.status(400).json({messsage:"Payment cannot be empty"});
             }
         }
-
         for(var key in shipping){
             if(shipping[key].length == 0){
                 return res.status(400).json({messsage:"Shipping cannot be empty"});
             }
         }
-
-        if (payment?.paymentFirstName && payment?.paymentLastName && payment?.paymentCardNum && payment?.paymentCardCVC && payment?.paymentCardYear && payment?.paymentCardMonth) {
+        
+        if (payment.paymentFirstName && payment.paymentLastName && payment.paymentCardNum && payment.paymentCardCVC && payment.paymentCardYear && payment.paymentCardMonth) {
+            // need to add businessstuffs
+            const response = await AxiosPOSTPaymentProcessing(payment)
+            if (response !== 201) {
+                return res.status(500).json({ message: "Payment Processing Failed" })
+            }
+            console.log(payment, "payment success")
             if (shipping?.shippingFirstName && shipping?.shippingLastName && shipping?.shippingPhoneNumber && shipping?.shippingAddressOne && shipping?.shippingCity && shipping?.shippingState && shipping?.shippingZip) {
                 const paymentInfo = await PaymentDB.collection.insertOne(payment);
                 const shippingInfo = await ShippingDB.collection.insertOne(shipping);

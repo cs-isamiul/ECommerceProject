@@ -43,9 +43,8 @@ function Review(props) {
       setShipping(location.state.shipState);
       setShipping((prevState) => ({
         ...prevState,
-        shippingAddressTwo: " "
-      }))
-
+        shippingAddressTwo: " ",
+      }));
     } else {
       setRedirct(true);
     }
@@ -55,8 +54,8 @@ function Review(props) {
   const onConfirm = async () => {
     //Make api call to /processorder with order info
     var items = cart.map((phone, index) => {
-      return {id: phone.id, qty: phone.count}
-    })
+      return { id: phone.id, qty: phone.count };
+    });
 
     const axiosCall = () =>
       axios({
@@ -98,9 +97,9 @@ function Review(props) {
         },
       });
     } else {
-      console.log(result);
+      console.log(result.data);
       //for now just print the error into console
-      alert("Error: " + result.message)
+      alert("Error: " + result.message);
     }
   };
 

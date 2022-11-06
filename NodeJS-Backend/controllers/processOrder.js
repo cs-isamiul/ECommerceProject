@@ -5,7 +5,7 @@ const CUSTOMER_INFO_DB = require("../models/Customer-Info");
 const OrderDB = CUSTOMER_INFO_DB.order;
 const PaymentDB = CUSTOMER_INFO_DB.payment;
 const ShippingDB = CUSTOMER_INFO_DB.shipping;
-const { AxiosGETSingle, AxiosPUTUpdateCount } = require("../helpers/AxiosCalls");
+const { AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTCredit, AxiosPOSTShipping } = require("../helpers/AxiosCalls");
 
 const createOrder = async (req, res) => {
     const { order } = req.body;
@@ -42,6 +42,18 @@ const createOrder = async (req, res) => {
             }
         }
 
+        //Call bank API to get a confirmation number
+        const paymentConf = await AxiosPOSTCredit({name:"E-Shop", account:"314159265359", customer:payment});
+        //payment.confirmation
+        if(paymentConf.status != 201){
+            return res.status(500).json({message:"Could not confirm card"});
+        }
+
+        payment.confirmation = paymentConf.data.confirmation;
+
+        //Call shipping to get a confirmation number
+        const shippingConf = AxiosPOSTShipping(shipping, {count:items.length, weight:5, size:"4-4-4"});
+
         for(var key in shipping){
             if(shipping[key].length == 0){
                 return res.status(400).json({messsage:"Shipping cannot be empty"});
@@ -53,13 +65,27 @@ const createOrder = async (req, res) => {
                 const paymentInfo = await PaymentDB.collection.insertOne(payment);
                 const shippingInfo = await ShippingDB.collection.insertOne(shipping);
                 const orderInfo = await OrderDB.collection.insertOne({orderTotal:"calculate after lab 9", orderPlacedOn:String(new Date()), items:items, payment:paymentInfo.insertedId, shipping:shippingInfo.insertedId});
-                return res.status(201).json({message:"Order success", confirmation: orderInfo.insertedId});
+                res.status(201).json({message:"Order success", confirmation: orderInfo.insertedId});
+                updateDBShippingInfo(shippingConf, orderInfo.insertedId);
             } else {
                 return res.status(500).json({message:"Could not insert order, missing info"});
             }
         }
     } else {
         res.status(500).json({ message: "Order must not be empty" });
+    }
+    console.log("<<<<<<Leaving OrderProcess");
+}
+
+const updateDBShippingInfo = async(shippingConf, orderID) => {
+    var label = await shippingConf;
+    console.log(orderID);
+    if(label.status == 201){
+        //TODO, update DB
+        console.log(label.data.label);
+    } else {
+        //TODO, professor said to just focus on 'happy path' for now
+        return -1;
     }
 }
 

@@ -9,7 +9,7 @@ def home():
     info = request.get_json()
     print(">>>>>", info)
     #Sleep is to show async behavior for ProcessOrder microservice
-    time.sleep(10)
+    time.sleep(5)
     return {"label":random.randrange(1000000,100000000)}, 201
 
 #Program only runs if it is main

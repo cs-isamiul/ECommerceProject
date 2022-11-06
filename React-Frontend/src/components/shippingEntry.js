@@ -41,11 +41,11 @@ export default function Shipping() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     console.log(
-      "line 40 shipping: " + location.state.payState.paymentFirstName
+      "line 40 shipping: " + location?.state?.payState?.paymentFirstName
     );
-    navigate("/cart/review", {
+    navigate("/cart/purchase", {
       state: {
-        payState: location.state.payState,
+        payment: location?.state?.payState,
         shipState: shipState,
       },
     });
@@ -177,7 +177,7 @@ export default function Shipping() {
             </Form.Group>
           </Col>
 
-          <button>Place Order</button>
+          <button>Proceed to Payment</button>
         </Form>
       </div>
     </>

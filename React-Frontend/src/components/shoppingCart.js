@@ -28,7 +28,7 @@ export default function Cart(props) {
   //   navigate("/cart", { state: { cart: cart } });
   // };
   const handleCheckout = () => {
-    navigate("/cart/purchase", { state: { cart: cart } });
+    navigate("/cart/shipping", { state: { cart: cart } });
   };
 
   return (
@@ -37,7 +37,11 @@ export default function Cart(props) {
 
       {cart.length > 0 ? (
         <React.Fragment>
-          <Button variant="outline-dark" onClick={handleCheckout} style={{ marginLeft: "10%"}}>
+          <Button
+            variant="outline-dark"
+            onClick={handleCheckout}
+            style={{ marginLeft: "10%" }}
+          >
             Proceed to Checkout
             <Badge pill bg="dark" style={{ marginLeft: ".2rem" }}></Badge>
           </Button>

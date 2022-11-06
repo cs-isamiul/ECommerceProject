@@ -151,7 +151,7 @@ function Review(props) {
           <h2>Total: ${total}</h2>
         </section>
         <section>
-          <button onClick={() => onConfirm()}>Confirm Order</button>&emsp;
+          <button onClick={() => onConfirm()}>Place Order</button>&emsp;
           <button onClick={() => navigate("/catalog")}>Cancel Order</button>
         </section>
       </div>

@@ -81,7 +81,7 @@ export default function Shop(props) {
 
       <section className="shoplist">
         {inventory.map((phone) => {
-          if (phone.invQty >= 0) {
+          if (phone.invQty > 0) {
             return (
               <FormattedPhoneData
                 key={phone.id}

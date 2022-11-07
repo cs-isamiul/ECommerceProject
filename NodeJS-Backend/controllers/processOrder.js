@@ -75,10 +75,10 @@ const updateDBShippingInfo = async(shippingConf, shippingID) => {
     //To do: find the order by orderID and update the shipping label of the order
     if(label.status == 201){
         //TODO, update DB
-        console.log(shippingID);
-        console.log(label.data.shippingLabel);
+        console.log("Shipping success! Shipping label : ", label.data.shippingLabel);
     } else {
         //TODO, professor said to just focus on 'happy path' for now
+        console.log("Shipping info failed somehow?")
         return -1;
     }
 }

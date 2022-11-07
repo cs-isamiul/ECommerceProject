@@ -62,7 +62,7 @@ async function AxiosPOSTPaymentProcessing(payment) {
     return response
 };
 
-async function AxiosGetStartShipping( shippingInfo) {
+async function AxiosPostStartShipping( shippingInfo) {
     let response = await axios({
         method: "post",
         url: "http://localhost:5000/ProcessShipment",
@@ -84,4 +84,4 @@ async function AxiosGetStartShipping( shippingInfo) {
 };
 
 
-module.exports = {AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTPaymentProcessing, AxiosGetStartShipping};
+module.exports = {AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTPaymentProcessing, AxiosPostStartShipping};

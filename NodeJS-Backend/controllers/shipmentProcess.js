@@ -5,6 +5,10 @@ const startShipping = asyncWrapper(async(req, res)=>{
     //
     const {businessEntity, entityAccount, shippingInfo} = req.body;
     const shippingLabel = makeShippingLabel(8);
+    console.log(">>>In shippipmentProcess, waiting for artificial delay to be over")
+    const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+    await delay(5000) /// waiting n ms
+
     res.status(201).json({message:
         "Successfully initiate shipping process, the order is from " + businessEntity + 
         " ,the account number is entityAccount" + entityAccount + 

@@ -47,7 +47,7 @@ const createOrder = async (req, res) => {
             }
         }
 
-        shipping.shippingLabel = "nullnull";
+        shipping.shippingLabel = "0";
 
         if (payment.paymentFirstName && payment.paymentLastName && payment.paymentCardNum && payment.paymentCardCVC && payment.paymentCardYear && payment.paymentCardMonth) {
             // need to add businessstuffs
@@ -74,30 +74,19 @@ const createOrder = async (req, res) => {
 
 const updateDBShippingInfo = async(shippingConf, shippingID) => {
     var label = await shippingConf;
-    console.log(label.data.shippingLabel);
-
-    // debug purpose
-    // await ShippingDB.find({_id : ObjectId(shippingID)})
-    // .then((result)=>{
-    //     console.log(result[0]);
-    // })
-    // .catch((err) => {
-    //     console.log("this shit just doesn't work");
-    // });
+    const _id = String(shippingID);
  
     //To do: find the order by orderID and update the shipping label of the order
-    await ShippingDB.updateOne({_id : ObjectId(shippingID)},{
-                shippingLabel: toString(label.data.shippingLabel)
-            })
-            .then((result) => {
-                console.log("Shipping label successfully added");
-            })
-            .catch((err)=>{
-                console.log("Shipping label isn't successfully added");
+    if(label.status == 201){
+        await ShippingDB.collection.updateOne({_id:new ObjectId(shippingID)},
+            {$set: {shippingLabel:label.data.shippingLabel}},
+            {upsert: true})
+            .then((result)=>{
+                console.log("Updated Shipping DB");
+            }).catch((err)=>{
+                console.log("Could not update Shipping DB, batch service will have to clean up");
             });
 
-    if(label.status == 201){
-        //TODO, update DB
         console.log("Shipping success! Shipping label: ", label.data.shippingLabel);
     } else {
         //TODO, professor said to just focus on 'happy path' for now

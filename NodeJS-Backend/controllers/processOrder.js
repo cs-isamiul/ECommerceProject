@@ -5,7 +5,7 @@ const CUSTOMER_INFO_DB = require("../models/Customer-Info");
 const OrderDB = CUSTOMER_INFO_DB.order;
 const PaymentDB = CUSTOMER_INFO_DB.payment;
 const ShippingDB = CUSTOMER_INFO_DB.shipping;
-const { AxiosGETSingle, AxiosPUTUpdateCount } = require("../helpers/AxiosCalls");
+const { AxiosGETSingle, AxiosPUTUpdateCount,  AxiosGetStartShipping} = require("../helpers/AxiosCalls");
 
 const createOrder = async (req, res) => {
     const { order } = req.body;
@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
         //Go through all sent items and check inventory status
         for (i = 0; i < items.length; i++) {
             const inventoryItem = await AxiosGETSingle(items[i].id);
-            if (!inventoryItem?.invQty && inventoryItem.invQty - qty > 0) {
+            if (!inventoryItem?.invQty && inventoryItem.invQty - items[i].qty <= 0) {
                 //If invalid qty or some other error
                 return res.status(406).json({ message: "Invalid", id: items[i].id });
             }
@@ -42,24 +42,42 @@ const createOrder = async (req, res) => {
             }
         }
 
+        const shippingCofirmation = AxiosGetStartShipping(shipping);
+
         for(var key in shipping){
             if(shipping[key].length == 0){
                 return res.status(400).json({messsage:"Shipping cannot be empty"});
             }
         }
 
+        shipping.label = 0;
+
         if (payment?.paymentFirstName && payment?.paymentLastName && payment?.paymentCardNum && payment?.paymentCardCVC && payment?.paymentCardYear && payment?.paymentCardMonth) {
             if (shipping?.shippingFirstName && shipping?.shippingLastName && shipping?.shippingPhoneNumber && shipping?.shippingAddressOne && shipping?.shippingCity && shipping?.shippingState && shipping?.shippingZip) {
                 const paymentInfo = await PaymentDB.collection.insertOne(payment);
                 const shippingInfo = await ShippingDB.collection.insertOne(shipping);
                 const orderInfo = await OrderDB.collection.insertOne({orderTotal:"calculate after lab 9", orderPlacedOn:String(new Date()), items:items, payment:paymentInfo.insertedId, shipping:shippingInfo.insertedId});
-                return res.status(201).json({message:"Order success", confirmation: orderInfo.insertedId});
+                res.status(201).json({message:"Order success", confirmation: orderInfo.insertedId});
+                updateDBShippingInfo(shippingCofirmation, shippingInfo.insertedId);
             } else {
                 return res.status(500).json({message:"Could not insert order, missing info"});
             }
         }
     } else {
         res.status(500).json({ message: "Order must not be empty" });
+    }
+}
+
+const updateDBShippingInfo = async(shippingConf, shippingID) => {
+    var label = await shippingConf;
+    //To do: find the order by orderID and update the shipping label of the order
+    if(label.status == 201){
+        //TODO, update DB
+        console.log(shippingID);
+        console.log(label.data.shippingLabel);
+    } else {
+        //TODO, professor said to just focus on 'happy path' for now
+        return -1;
     }
 }
 

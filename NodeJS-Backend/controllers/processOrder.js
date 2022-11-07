@@ -5,8 +5,9 @@ const CUSTOMER_INFO_DB = require("../models/Customer-Info");
 const OrderDB = CUSTOMER_INFO_DB.order;
 const PaymentDB = CUSTOMER_INFO_DB.payment;
 const ShippingDB = CUSTOMER_INFO_DB.shipping;
+const ObjectId = require('mongodb').ObjectId; 
 
-const { AxiosGETSingle, AxiosPUTUpdateCount,  AxiosGetStartShipping, AxiosPOSTPaymentProcessing} = require("../helpers/AxiosCalls");
+const { AxiosGETSingle, AxiosPUTUpdateCount, AxiosPostStartShipping, AxiosPOSTPaymentProcessing} = require("../helpers/AxiosCalls");
 
 const createOrder = async (req, res) => {
     const { order } = req.body;
@@ -38,7 +39,7 @@ const createOrder = async (req, res) => {
             }
         }
 
-        const shippingCofirmation = AxiosGetStartShipping(shipping);
+        const shippingCofirmation = AxiosPostStartShipping(shipping);
 
         for(var key in shipping){
             if(shipping[key].length == 0){
@@ -46,7 +47,8 @@ const createOrder = async (req, res) => {
             }
         }
 
-        shipping.label = 0;
+        shipping.shippingLabel = "nullnull";
+
         if (payment.paymentFirstName && payment.paymentLastName && payment.paymentCardNum && payment.paymentCardCVC && payment.paymentCardYear && payment.paymentCardMonth) {
             // need to add businessstuffs
             const response = await AxiosPOSTPaymentProcessing(payment)
@@ -72,10 +74,31 @@ const createOrder = async (req, res) => {
 
 const updateDBShippingInfo = async(shippingConf, shippingID) => {
     var label = await shippingConf;
+    console.log(label.data.shippingLabel);
+
+    // debug purpose
+    // await ShippingDB.find({_id : ObjectId(shippingID)})
+    // .then((result)=>{
+    //     console.log(result[0]);
+    // })
+    // .catch((err) => {
+    //     console.log("this shit just doesn't work");
+    // });
+ 
     //To do: find the order by orderID and update the shipping label of the order
+    await ShippingDB.updateOne({_id : ObjectId(shippingID)},{
+                shippingLabel: toString(label.data.shippingLabel)
+            })
+            .then((result) => {
+                console.log("Shipping label successfully added");
+            })
+            .catch((err)=>{
+                console.log("Shipping label isn't successfully added");
+            });
+
     if(label.status == 201){
         //TODO, update DB
-        console.log("Shipping success! Shipping label : ", label.data.shippingLabel);
+        console.log("Shipping success! Shipping label: ", label.data.shippingLabel);
     } else {
         //TODO, professor said to just focus on 'happy path' for now
         console.log("Shipping info failed somehow?")

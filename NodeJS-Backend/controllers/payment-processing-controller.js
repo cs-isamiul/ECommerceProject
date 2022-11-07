@@ -5,7 +5,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 const createProcessPayment = async (req, res) => {    
-    console.log(req.body)   
+    // console.log(req.body)   
     res.status(201).json({msg:"Payment Accepted", confirmationNumber:"987654321" })
 }
 

@@ -18,7 +18,7 @@ const createOrder = async (req, res) => {
         //Go through all sent items and check inventory status
         for (i = 0; i < items.length; i++) {
             const inventoryItem = await AxiosGETSingle(items[i].id);
-            if (!inventoryItem?.invQty && inventoryItem.invQty - items[i].qty > 0) {
+            if (!inventoryItem?.invQty && inventoryItem.invQty - items[i].qty <= 0) {
                 //If invalid qty or some other error
                 return res.status(406).json({ message: "Invalid", id: items[i].id });
             }
@@ -50,7 +50,7 @@ const createOrder = async (req, res) => {
             if (response !== 201) {
                 return res.status(500).json({ message: "Payment Processing Failed" })
             }
-            console.log(payment, "payment success")
+            console.log("Payment Success! Bank Confirmation Number: ", payment.bankConfirmationNumber)
             if (shipping?.shippingFirstName && shipping?.shippingLastName && shipping?.shippingPhoneNumber && shipping?.shippingAddressOne && shipping?.shippingCity && shipping?.shippingState && shipping?.shippingZip) {
                 const paymentInfo = await PaymentDB.collection.insertOne(payment);
                 const shippingInfo = await ShippingDB.collection.insertOne(shipping);

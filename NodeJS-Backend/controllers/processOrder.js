@@ -5,9 +5,8 @@ const CUSTOMER_INFO_DB = require("../models/Customer-Info");
 const OrderDB = CUSTOMER_INFO_DB.order;
 const PaymentDB = CUSTOMER_INFO_DB.payment;
 const ShippingDB = CUSTOMER_INFO_DB.shipping;
-const { AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTPaymentProcessing } = require("../helpers/AxiosCalls");
-const { createProcessPayment } = require('./payment-processing-controller');
-const { getSingleItem } = require("./inventory");
+
+const { AxiosGETSingle, AxiosPUTUpdateCount,  AxiosGetStartShipping, AxiosPOSTPaymentProcessing} = require("../helpers/AxiosCalls");
 
 const createOrder = async (req, res) => {
     const { order } = req.body;
@@ -38,12 +37,16 @@ const createOrder = async (req, res) => {
                 return res.status(400).json({messsage:"Payment cannot be empty"});
             }
         }
+
+        const shippingCofirmation = AxiosGetStartShipping(shipping);
+
         for(var key in shipping){
             if(shipping[key].length == 0){
                 return res.status(400).json({messsage:"Shipping cannot be empty"});
             }
         }
-        
+
+        shipping.label = 0;
         if (payment.paymentFirstName && payment.paymentLastName && payment.paymentCardNum && payment.paymentCardCVC && payment.paymentCardYear && payment.paymentCardMonth) {
             // need to add businessstuffs
             const response = await AxiosPOSTPaymentProcessing(payment)
@@ -51,17 +54,32 @@ const createOrder = async (req, res) => {
                 return res.status(500).json({ message: "Payment Processing Failed" })
             }
             console.log("Payment Success! Bank Confirmation Number: ", payment.bankConfirmationNumber)
+
             if (shipping?.shippingFirstName && shipping?.shippingLastName && shipping?.shippingPhoneNumber && shipping?.shippingAddressOne && shipping?.shippingCity && shipping?.shippingState && shipping?.shippingZip) {
                 const paymentInfo = await PaymentDB.collection.insertOne(payment);
                 const shippingInfo = await ShippingDB.collection.insertOne(shipping);
                 const orderInfo = await OrderDB.collection.insertOne({orderTotal:"calculate after lab 9", orderPlacedOn:String(new Date()), items:items, payment:paymentInfo.insertedId, shipping:shippingInfo.insertedId});
-                return res.status(201).json({message:"Order success", confirmation: orderInfo.insertedId});
+                res.status(201).json({message:"Order success", confirmation: orderInfo.insertedId});
+                updateDBShippingInfo(shippingCofirmation, shippingInfo.insertedId);
             } else {
                 return res.status(500).json({message:"Could not insert order, missing info"});
             }
         }
     } else {
         res.status(500).json({ message: "Order must not be empty" });
+    }
+}
+
+const updateDBShippingInfo = async(shippingConf, shippingID) => {
+    var label = await shippingConf;
+    //To do: find the order by orderID and update the shipping label of the order
+    if(label.status == 201){
+        //TODO, update DB
+        console.log(shippingID);
+        console.log(label.data.shippingLabel);
+    } else {
+        //TODO, professor said to just focus on 'happy path' for now
+        return -1;
     }
 }
 

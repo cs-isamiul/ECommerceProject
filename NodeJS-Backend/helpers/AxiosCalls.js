@@ -61,4 +61,27 @@ async function AxiosPOSTPaymentProcessing(payment) {
     });
     return response
 };
-module.exports = {AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTPaymentProcessing};
+
+async function AxiosGetStartShipping( shippingInfo) {
+    let response = await axios({
+        method: "post",
+        url: "http://localhost:5000/ProcessShipment",
+        data: {
+            "businessEntity": "EShop",
+            "businessAccount": "Eshop@gmail.com",
+            "shippingInfo": shippingInfo
+        },
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+    }).then((reply) => {
+        return reply;
+    }).catch((err) => {
+        return err.response;
+    });
+    return response;
+};
+
+
+module.exports = {AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTPaymentProcessing, AxiosGetStartShipping};

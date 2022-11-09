@@ -43,9 +43,8 @@ function Review(props) {
       setShipping(location.state.shipState);
       setShipping((prevState) => ({
         ...prevState,
-        shippingAddressTwo: " "
-      }))
-
+        shippingAddressTwo: " ",
+      }));
     } else {
       setRedirct(true);
     }
@@ -55,8 +54,8 @@ function Review(props) {
   const onConfirm = async () => {
     //Make api call to /processorder with order info
     var items = cart.map((phone, index) => {
-      return {id: phone.id, qty: phone.count}
-    })
+      return { id: phone.id, qty: phone.count };
+    });
 
     const axiosCall = () =>
       axios({
@@ -98,9 +97,9 @@ function Review(props) {
         },
       });
     } else {
-      console.log(result);
+      console.log(result.response.data.message);
       //for now just print the error into console
-      alert("Error: " + result.message)
+      alert("Error: " + result.response.data.message);
     }
   };
 
@@ -152,7 +151,7 @@ function Review(props) {
           <h2>Total: ${total}</h2>
         </section>
         <section>
-          <button onClick={() => onConfirm()}>Confirm Order</button>&emsp;
+          <button onClick={() => onConfirm()}>Place Order</button>&emsp;
           <button onClick={() => navigate("/catalog")}>Cancel Order</button>
         </section>
       </div>

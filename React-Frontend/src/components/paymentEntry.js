@@ -39,8 +39,8 @@ export default function Payment() {
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
-    navigate("/cart/shipping", {
-      state: { payState: payState, shipping: location?.state?.shipState },
+    navigate("/cart/review", {
+      state: { payState: payState, shipState: location?.state?.shipState },
     });
     //     navigate("/cart/shipping", {state:{payState: payState, cart: cart}});
   };
@@ -135,7 +135,7 @@ export default function Payment() {
             </Form.Group>
           </Col>
 
-          <button>Pay</button>
+          <button>Review Order</button>
         </Form>
       </div>
     </>

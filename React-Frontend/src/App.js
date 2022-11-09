@@ -78,11 +78,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/cart/confirmation"
-          element={<OrderConfirm />
-          }
-        />
+        <Route path="/cart/confirmation" element={<OrderConfirm />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

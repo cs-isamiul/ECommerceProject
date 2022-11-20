@@ -1,42 +1,33 @@
 const mongoose = require('mongoose');
 
 const PaymentSchema = new mongoose.Schema({
-    paymentInfo: {
-        paymentFirstName: {
-            type: String,   
-            required:[true], 
-            trim:true,
-        },
-        paymentLastName: {
-            type: String,   
-            required:[true], 
-            trim:true,
-        },
-        paymentCardNum: {
-            type: String, 
-            required:[true], 
-            trim:true,
-        },
-        paymentCVC: {
-            type: String,  
-            required:[true], 
-            trim:true,
-        },
-        paymentCardYear: {
-            type: String, 
-            required:[true], 
-            trim:true,
-        },
-        paymentCardMonth: {
-            type: String, 
-            required:[true], 
-            trim:true,
-        },
-        shippingLabel: {
-            type: String,
-            required:[false],
-            trim:true,
-        }
+    paymentFirstName: {
+        type:String,
+        required:[true, "Must provide a first name"]
+    },
+    paymentLastName: {
+        type:String,
+        required:[true, "Must provide a last name"]
+    },
+    paymentCardNum:{
+        type:String,
+        required:[true, "Must provide card num"]
+    },
+    paymentCardCVC:{
+        type:String,
+        required:[true, "Must provide CVC"]
+    },
+    paymentCardYear:{
+        type:String,
+        required:[true, "Must provide expiration year"]
+    },
+    paymentCardMonth:{
+        type:String,
+        required:[true, "Must provide expiration month"]
+    },
+    bankConfirmationNumber:{
+        type:String,
+        required:[true, "Must provide bank confirmation refrence"]
     },
 });
 

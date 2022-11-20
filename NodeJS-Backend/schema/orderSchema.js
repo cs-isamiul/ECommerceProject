@@ -20,6 +20,10 @@ const OrderSchema = new mongoose.Schema({
     shipping:{
         type:ObjectId,
         required:[true, "Must provide payment refrence"]
+    },
+    shipping:{
+        type:Boolean,
+        default: false
     }
 });
 

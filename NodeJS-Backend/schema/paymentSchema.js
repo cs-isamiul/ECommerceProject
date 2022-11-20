@@ -32,6 +32,11 @@ const PaymentSchema = new mongoose.Schema({
             required:[true], 
             trim:true,
         },
+        shippingLabel: {
+            type: String,
+            required:[false],
+            trim:true,
+        }
     },
 });
 

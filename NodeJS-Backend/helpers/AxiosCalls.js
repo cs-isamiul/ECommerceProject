@@ -39,4 +39,48 @@ async function AxiosPUTUpdateCount(id, qty) {
     });
     return response;
 };
-module.exports = {AxiosGETSingle, AxiosPUTUpdateCount};
+
+async function AxiosPOSTPaymentProcessing(payment) {
+    let response = await axios({
+        method: "post",
+        url: "http://localhost:5000/payment-processing",
+        data: {
+            "payment": payment,
+            "businessEntity":"EShop",
+            "entityAccount" : "EShop@gmail.com"
+        },
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+    }).then((reply) => {
+        payment.bankConfirmationNumber = reply.data.confirmationNumber
+        return reply.status;
+    }).catch((err) => {
+        return err.response.status;
+    });
+    return response
+};
+
+async function AxiosPostStartShipping( shippingInfo) {
+    let response = await axios({
+        method: "post",
+        url: "http://localhost:5000/ProcessShipment",
+        data: {
+            "businessEntity": "EShop",
+            "businessAccount": "Eshop@gmail.com",
+            "shippingInfo": shippingInfo
+        },
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+    }).then((reply) => {
+        return reply;
+    }).catch((err) => {
+        return err.response;
+    });
+    return response;
+};
+
+module.exports = {AxiosGETSingle, AxiosPUTUpdateCount, AxiosPOSTPaymentProcessing, AxiosPostStartShipping};

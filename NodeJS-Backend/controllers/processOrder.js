@@ -60,8 +60,7 @@ const createOrder = async (req, res) => {
             if (shipping?.shippingFirstName && shipping?.shippingLastName && shipping?.shippingPhoneNumber && shipping?.shippingAddressOne && shipping?.shippingCity && shipping?.shippingState && shipping?.shippingZip) {
                 const paymentInfo = await PaymentDB.collection.insertOne(payment);
                 const shippingInfo = await ShippingDB.collection.insertOne(shipping);
-                orderInfo.batched = false;
-                const orderInfo = await OrderDB.collection.insertOne({orderTotal:"calculate after lab 9", orderPlacedOn:String(new Date()), items:items, payment:paymentInfo.insertedId, shipping:shippingInfo.insertedId});
+                const orderInfo = await OrderDB.collection.insertOne({orderTotal:"calculate after lab 9", orderPlacedOn:String(new Date()), items:items, payment:paymentInfo.insertedId, shipping:shippingInfo.insertedId, batched:false});
                 res.status(201).json({message:"Order success", confirmation: orderInfo.insertedId});
                 updateDBShippingInfo(shippingCofirmation, shippingInfo.insertedId);
             } else {

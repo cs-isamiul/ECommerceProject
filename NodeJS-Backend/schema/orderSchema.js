@@ -14,11 +14,11 @@ const OrderSchema = new mongoose.Schema({
         qty:String
     }],
     payment:{
-        type:ObjectId,
+        type:String,
         required:[true, "Must provide payment refrence"]
     },
     shipping:{
-        type:ObjectId,
+        type:String,
         required:[true, "Must provide payment refrence"]
     },
     shipping:{

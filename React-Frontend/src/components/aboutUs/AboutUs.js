@@ -25,18 +25,18 @@ function About() {
           <span class="name_caption">Hans Heng Yu</span>
         </div>
         <div className='item'>
+          <img className='aboutUs_img' src={bennyPic}/>
+          <span class="title_caption">CDO</span>
+          <span class="name_caption">Benny Naftali</span>
+        </div>
+        <div className='item'>
           <img className='aboutUs_img' src={samiulPic}/>
           <span class="title_caption">CTO</span>
           <span class="name_caption">Samiul Islam</span>
         </div>
         <div className='item'>
-          <img className='aboutUs_img' src={bennyPic}/>
-          <span class="title_caption">Intern #1</span>
-          <span class="name_caption">Benny Naftali</span>
-        </div>
-        <div className='item'>
           <img className='aboutUs_img' src={stephenPic}/>
-          <span class="title_caption">Intern #2</span>
+          <span class="title_caption">CISO</span>
           <span class="name_caption">Stephen Southard</span>
         </div>
       </div>

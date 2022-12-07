@@ -17,12 +17,19 @@ function Review(props) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  //calculate total, probably remove later
+  //calculate total, this should be done
+  //on backend (at least for final), but due
+  //to time we will do it here
   {
     cart.map((phone, index) => {
       total += Number(phone.price.slice(1)) * phone.count;
     });
   }
+
+  //again, shouldn't really be calculated here, but not enough time
+  const shippingIncluded = total + 4.99
+  const taxAmount = ((total + 4.99)*0.075).toFixed(2);
+  const finalTotal = ((total + 4.99)*1.075).toFixed(2);
 
   //redirect to catalog if needed
   useEffect(() => {
@@ -93,7 +100,7 @@ function Review(props) {
           payState: payment,
           shipState: shipping,
           confirmation: result?.data?.confirmation,
-          totalTemp: total,
+          totals: [total,shippingIncluded,taxAmount,finalTotal],
         },
       });
     } else {
@@ -145,10 +152,10 @@ function Review(props) {
         <hr />
         <section>
           <h2>Subtotal: ${total}</h2>
-          <h2>Shipping & Handling: Lab 9 Shipping</h2>
-          <h2>Total Before Taxes: ${total}</h2>
-          <h2>Estimated Taxes: Lab 9 Shipping</h2>
-          <h2>Total: ${total}</h2>
+          <h2>Shipping & Handling: $4.99</h2>
+          <h2>Total Before Taxes: ${shippingIncluded}</h2>
+          <h2>Estimated Taxes: ${taxAmount}</h2>
+          <h2>Total: ${finalTotal}</h2>
         </section>
         <section>
           <button onClick={() => onConfirm()}>Place Order</button>&emsp;

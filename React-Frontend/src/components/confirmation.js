@@ -12,7 +12,7 @@ function OrderConfirm() {
   const [confirmation, setConfirmation] = useState([]);
   const [cart, setCart] = useState([]);
   //total is temp 'solution'
-  const [total, setTotal] = useState([]);
+  const [totals, setTotals] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ function OrderConfirm() {
       setShipping(location.state.shipState);
       setConfirmation(location.state.confirmation);
       setCart(location.state.cart);
-      setTotal(location.state.totalTemp);
+      setTotals(location.state.totals);
       //get all info from database confirmation later
       setPayment((prevState) => ({
         ...prevState,
@@ -52,9 +52,6 @@ function OrderConfirm() {
       <section>
         <GenerateInfoHeaderNew payment={payment} shipping={shipping} />
       </section>
-      <section>
-        <h3>Expected Delivery Date: Lab 9 Microservice Call</h3>
-      </section>
     </div>
     <section className="shoplist" style={{ marginLeft: "5rem" }}>
       {cart.map((phone, index) => {
@@ -66,11 +63,11 @@ function OrderConfirm() {
       <hr />
       <section>
         <h2>Payment Summary #{confirmation}</h2>
-        <h2>Subtotal: ${total}</h2>
-        <h2>Shipping & Handling: Lab 9 Shipping</h2>
-        <h2>Total Before Taxes: ${total}</h2>
-        <h2>Estimated Taxes: Lab 9 Shipping</h2>
-        <h2>Total: ${total}</h2>
+        <h2>Subtotal: ${totals[0]}</h2>
+        <h2>Shipping & Handling: $4.99</h2>
+        <h2>Subtotal Before Taxes: ${totals[1]}</h2>
+        <h2>Estimated Taxes: ${totals[2]}</h2>
+        <h2>Total: ${totals[3]}</h2>
       </section>
     </div>
   </>
